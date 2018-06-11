@@ -11,6 +11,6 @@ In order to get quality metadata, we would like to identify:
 * what can be improved
 
 The metadata folder contains scripts and files generated using the [GBIF registry API](https://www.gbif.org/developer/registry) to retrieve and visualise information about about metadata's datasets.
-The goal is to get an overview of the quality of metadata.
+The goal is to get an overview of the quality of the metadata.
 
 Recommendations to improve metadata quality will be written in this repository's wiki.
