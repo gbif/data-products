@@ -52,7 +52,7 @@ def get_metadata_from_API(sample_datasets=None, exclude=None):
             response = response.json()
             for dataset in response["results"]:
                 if exclude is not None:
-                    if dataset["publishingOrganizationKey"] != exclude:
+                    if dataset["publishingOrganizationKey"] not in exclude:
                         summary_metadata = update_dataframe(summary_metadata, dataset["key"], dataset)
                 else:
                     summary_metadata = update_dataframe(summary_metadata, dataset["key"], dataset)
