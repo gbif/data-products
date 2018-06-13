@@ -240,8 +240,8 @@ def count_categories(my_summary, variable_of_interest, label_for_zero_count):
     '''
     Counts items in list in a given column
     '''
-    all_type = pd.Series([item for sublist in my_summary[variable_of_interest].tolist() for item in sublist]).value_counts()
-    my_type = all_type.append(pd.Series(len([my_summary[my_summary.contact_type.apply(len) == 0]]),
+    all_type = pd.Series(my_summary[variable_of_interest].sum()).value_counts()
+    my_type = all_type.append(pd.Series(len([my_summary[my_summary[variable_of_interest].apply(len) == 0]]),
                                         index=[label_for_zero_count]))
     return my_type
 
@@ -486,7 +486,7 @@ def plot_medthod_metadata(my_summary,
 
     # ADD EXAMPLE
     if example_summary is not None:
-        examples = count_categories(example_summary, 'samplingDescription_field_filled', 'NO TAXON')
+        examples = count_categories(example_summary, 'samplingDescription_field_filled', 'NO paragraph')
         ax2.barh(y=np.arange(examples.size), width= examples.tolist(), color=example_color, alpha=alpha_example)
         for index, line in example_summary.iterrows():
             ax1.axvline(line["samplingDescription_total_len"], color=example_color, linestyle='--')
