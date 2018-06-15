@@ -60,6 +60,48 @@ def get_metadata_from_API(sample_datasets=None, exclude=None):
     return summary_metadata
 
 
+def get_metadata_from_API_one_country(country):
+    '''
+    Get the infor we want to monitor and display it
+    '''
+    fields_of_interest = ["type",
+                          "title_len",
+                          "has_description",
+                          "has_adm_contact",
+                          "has_adm_contact_email",
+                          "has_geographic_descrition",
+                          "has_bounding_box",
+                          "number_of_dates",
+                          "has_qualityControl",
+                          "has_studyExtent",
+                          "has_sampling",
+                          "has_methodSteps"]
+    minimun_title_len = 3
+    summary_metadata = pd.DataFrame(columns=fields_of_interest)
+
+    offset = 0
+    step = 300
+    limit = offset + step
+    end_of_records = False
+    while not end_of_records:
+        param = {
+            "country": country,
+            "offset": offset,
+            "limit": limit
+        }
+        response = requests.get("http://api.gbif.org/v1/dataset", param)
+        response = response.json()
+        for dataset in response["results"]:
+            summary_metadata = update_dataframe(summary_metadata, dataset["key"], dataset)
+            summary_metadata = update_summary_with_scores(summary_metadata, dataset["key"], minimun_title_len)
+        time.sleep(1)
+        offset += step
+        limit += step
+        end_of_records = response["endOfRecords"]
+
+    return summary_metadata
+
+
 def update_dataframe(summary_metadata, uuid, response):
     '''
     Update all columns dataset for a given row
