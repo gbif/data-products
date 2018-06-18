@@ -303,7 +303,10 @@ def plot_general_scores(my_summary, score_names, scores_colors):
     ax1, ax2 = plt.subplot(122), plt.subplot(121)
 
     golbal_scores = scores_data.mean(axis=1).round(0).value_counts(ascending=True)
-    ax1.pie(golbal_scores, colors=list(scores_colors.values())[3-len(golbal_scores):3], autopct='%1.1f%%')
+    colors_piechart = []
+    for col in golbal_scores.index.tolist():
+        colors_piechart.append(scores_colors[col])
+    ax1.pie(golbal_scores, colors=colors_piechart, autopct='%1.1f%%')
     ax1.axis('equal')
     ax1.set_title("Average scores")
 
