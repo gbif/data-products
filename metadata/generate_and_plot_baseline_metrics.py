@@ -89,7 +89,7 @@ def get_metadata_from_API_one_country(country):
             "offset": offset,
             "limit": limit
         }
-        response = requests.get("http://api.gbif.org/v1/dataset", param)
+        response = requests.get("http://api.gbif.org/v1/dataset/search", param)
         response = response.json()
         for dataset in response["results"]:
             summary_metadata = update_dataframe(summary_metadata, dataset["key"], dataset)
