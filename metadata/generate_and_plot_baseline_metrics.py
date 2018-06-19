@@ -85,7 +85,7 @@ def get_metadata_from_API_one_country(country):
     end_of_records = False
     while not end_of_records:
         param = {
-            "country": country,
+            "publishingCountry": country,
             "offset": offset,
             "limit": limit
         }
