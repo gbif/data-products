@@ -54,7 +54,6 @@ def get_metadata_from_API(sample_datasets=None, exclude=None):
                     summary_metadata = update_summary_with_scores(summary_metadata, dataset["key"], minimun_title_len)
             time.sleep(1)
             offset += step
-            limit += step
             end_of_records = response["endOfRecords"]
 
     return summary_metadata
@@ -96,7 +95,6 @@ def get_metadata_from_API_one_country(country):
             summary_metadata = update_summary_with_scores(summary_metadata, dataset["key"], minimun_title_len)
         time.sleep(1)
         offset += step
-        limit += step
         end_of_records = response["endOfRecords"]
 
     return summary_metadata

@@ -58,7 +58,6 @@ def get_metadata_from_API(sample_datasets=None, exclude=None):
                     summary_metadata = update_dataframe(summary_metadata, dataset["key"], dataset)
             time.sleep(1)
             offset += step
-            limit += step
             end_of_records = response["endOfRecords"]
 
     return summary_metadata
