@@ -6,15 +6,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def get_metadata_from_API(sample_datasets=None, exclude=None):
+def get_metadata_from_API(sample_datasets=None, exclude=None, step=300):
     '''
-    Get the infor we want to monitor and display it
+    Get the infor we want to monitor
     '''
     fields_of_interest = ["type",
                           "title_len",
                           "has_description",
-                          "has_adm_contact",
-                          "has_adm_contact_email",
+                          "has_adm_or_metadata_contact",
+                          "has_adm_or_metadata_contact_email",
                           "has_geographic_descrition",
                           "has_bounding_box",
                           "number_of_dates",
@@ -59,45 +59,70 @@ def get_metadata_from_API(sample_datasets=None, exclude=None):
     return summary_metadata
 
 
-def get_metadata_from_API_one_country(country):
+def get_metadata_from_API_one_country(country, step=300):
     '''
-    Get the infor we want to monitor and display it
+    Get the info we want to monitor for one country
     '''
-    fields_of_interest = ["type",
-                          "title_len",
-                          "has_description",
-                          "has_adm_contact",
-                          "has_adm_contact_email",
-                          "has_geographic_descrition",
-                          "has_bounding_box",
-                          "number_of_dates",
-                          "has_qualityControl",
-                          "has_studyExtent",
-                          "has_sampling",
-                          "has_methodSteps"]
-    minimun_title_len = 3
-    summary_metadata = pd.DataFrame(columns=fields_of_interest)
+    return get_metadata_from_API(get_uuid_datasets_one_country(country, step))
 
+
+def get_uuid_datasets_one_country(country, step):
+    '''
+    Get the list of datasets published by one country
+    '''
+    return get_uuid_datasets_one_variable("publishingCountry", country, step)
+
+
+def get_uuid_datasets_one_publisher(org_uuid, step):
+    '''
+    Get the list of datasets published by one organization
+    '''
+    return get_uuid_datasets_one_variable("publishingOrg", org_uuid, step)
+
+
+def get_uuid_datasets_one_variable(varname, varvalue, step):
+    '''
+    Get the list of datasets published by one variable
+    '''
+    return get_info_dataset_one_variable("key", varname, varvalue, step)
+
+
+def get_uuid_organizations_one_country(country, step):
+    '''
+    Get the list of datasets published by one variable
+    '''
+    return list(set(get_info_dataset_one_variable("publishingOrganizationKey",
+                                                  "publishingCountry",
+                                                  country,
+                                                  step)))
+
+
+def get_info_dataset_one_variable(info, varname, varvalue, step):
+    '''
+    Infor must be the key of an element available from the API
+    '''
     offset = 0
-    step = 300
+    dataset_list = []
     limit = offset + step
     end_of_records = False
     while not end_of_records:
         param = {
-            "publishingCountry": country,
+            varname: varvalue,
             "offset": offset,
             "limit": limit
         }
         response = requests.get("http://api.gbif.org/v1/dataset/search", param)
-        response = response.json()
-        for dataset in response["results"]:
-            summary_metadata = update_dataframe(summary_metadata, dataset["key"], dataset)
-            summary_metadata = update_summary_with_scores(summary_metadata, dataset["key"], minimun_title_len)
-        time.sleep(1)
-        offset += step
-        end_of_records = response["endOfRecords"]
-
-    return summary_metadata
+        if response.ok:
+            response = response.json()
+            for dataset in response["results"]:
+                if info in dataset:
+                    dataset_list.append(dataset[info])
+            time.sleep(1)
+            offset += step
+            end_of_records = response["endOfRecords"]
+        else:
+            end_of_records = True
+    return dataset_list
 
 
 def update_dataframe(summary_metadata, uuid, response):
@@ -134,7 +159,7 @@ def update_dataframe_general_metadata(summary_metadata, uuid, response):
     else:
         summary_metadata.at[uuid, "title_len"] = 0.0
     if "description" in response:
-        if response["description"] != "":
+        if response["description"]:
             summary_metadata.at[uuid, "has_description"] = True
     return summary_metadata
 
@@ -143,15 +168,15 @@ def update_dataframe_contact_metadata(summary_metadata, uuid, response):
     '''
     Update contact metadata columns of a dataset for a given row
     '''
-    summary_metadata.at[uuid, "has_adm_contact"] = False
-    summary_metadata.at[uuid, "has_adm_contact_email"] = False
+    summary_metadata.at[uuid, "has_adm_or_metadata_contact"] = False
+    summary_metadata.at[uuid, "has_adm_or_metadata_contact_email"] = False
     if "contacts" in response:
         for ind in response["contacts"]:
             if "type" in ind:
-                if ind["type"] == "ADMINISTRATIVE_POINT_OF_CONTACT":
-                    summary_metadata.at[uuid, "has_adm_contact"] = True
+                if ind["type"] == "ADMINISTRATIVE_POINT_OF_CONTACT" or ind["type"] == "METADATA_AUTHOR":
+                    summary_metadata.at[uuid, "has_adm_or_metadata_contact"] = True
                 if "email" in ind:
-                    summary_metadata.at[uuid, "has_adm_contact_email"] = True
+                    summary_metadata.at[uuid, "has_adm_or_metadata_contact_email"] = True
     return summary_metadata
 
 
@@ -164,7 +189,7 @@ def update_dataframe_geography_metadata(summary_metadata, uuid, response):
     if "geographicCoverages" in response:
         for geo in response["geographicCoverages"]:
             if "description" in geo:
-                if geo["description"] != "":
+                if geo["description"]:
                     summary_metadata.at[uuid, "has_geographic_descrition"] = True
             if "boundingBox" in geo:
                 if len(geo["boundingBox"].keys()) > 1:
@@ -248,9 +273,9 @@ def score_email(summary_metadata, uuid):
     Calculate quality score for administrative contact
     '''
     score = 0
-    if summary_metadata.loc[uuid, "has_adm_contact"]:
+    if summary_metadata.loc[uuid, "has_adm_or_metadata_contact"]:
         score += 1
-    if summary_metadata.loc[uuid, "has_adm_contact_email"]:
+    if summary_metadata.loc[uuid, "has_adm_or_metadata_contact_email"]:
         score += 1
     return score
 
