@@ -15,9 +15,9 @@ The goal is to get an overview of the quality of the metadata.
 
 
 To see the plots generated to visualise baseline metrics, you can check the ipython notebooks:
-* [for the BID datasets](https://github.com/gbif/data-products/blob/master/metadata/baseline_metrics_metadata_BID_datasets.ipynb)
-* [for all the datasets except PLAZIs, GEOTAGs or PANGEAs](https://github.com/gbif/data-products/blob/master/metadata/baseline_metrics_metadata_all_dataset_NO_plazi_geotag_pangea.ipynb)
+* [for some of the BID datasets](https://github.com/gbif/data-products/blob/master/metadata/baseline_metrics_metadata_BID_datasets.ipynb)
+* [for a sample of all the datasets except PLAZIs, GEOTAGs or PANGEAs](https://github.com/gbif/data-products/blob/master/metadata/baseline_metrics_metadata_all_dataset_NO_plazi_geotag_pangea.ipynb)
 
 NB: you need to rerun them if you wish to have more recent plots.
 
-The metrics chosen to represent metadata quality are detailed in the notebook and will be explained in the repository wiki.
+The metrics chosen to represent metadata quality are detailed in the repository [Metadata wiki](https://github.com/gbif/data-products/wiki/Metadata).
