@@ -13,10 +13,12 @@ def get_metadata_from_API(sample_datasets=None, exclude=None, step=300):
     fields_of_interest = ["type",
                           "title_len",
                           "has_description",
+                          "has_purpose",
                           "has_adm_or_metadata_contact",
                           "has_adm_or_metadata_contact_email",
                           "has_geographic_descrition",
                           "has_bounding_box",
+                          "has_taxonomy",
                           "number_of_dates",
                           "has_qualityControl",
                           "has_studyExtent",
@@ -28,19 +30,19 @@ def get_metadata_from_API(sample_datasets=None, exclude=None, step=300):
 
         for uuid in sample_datasets:
             response = requests.get("http://api.gbif.org/v1/dataset/"+uuid)
-            response = response.json()
-            summary_metadata = update_dataframe(summary_metadata, uuid, response)
-            summary_metadata = update_summary_with_scores(summary_metadata, uuid, minimun_title_len)
-            time.sleep(1)
-    else:
+            if response.ok:
+                response = response.json()
+                summary_metadata = update_dataframe(summary_metadata, uuid, response)
+                summary_metadata = update_summary_with_scores(summary_metadata, uuid, minimun_title_len)
+            else:
+                print("NOT OK: ", uuid)
+    else: 
         offset = 0
-        step = 300
-        limit = offset + step
         end_of_records = False
         while not end_of_records:
             param = {
                 "offset": offset,
-                "limit": limit
+                "limit": step
             }
             response = requests.get("http://api.gbif.org/v1/dataset", param)
             response = response.json()
@@ -133,8 +135,14 @@ def update_dataframe(summary_metadata, uuid, response):
     # GLOBAL
     summary_metadata = update_dataframe_general_metadata(summary_metadata, uuid, response)
 
+    # PURPOSE
+    summary_metadata = update_dataframe_pupose_metadata(summary_metadata, uuid, response)
+
     # CONTACTS
     summary_metadata = update_dataframe_contact_metadata(summary_metadata, uuid, response)
+
+    # TAXONOMY
+    summary_metadata = update_dataframe_taxonomy_metadata(summary_metadata, uuid, response)
 
     # GEOGRAPHY
     summary_metadata = update_dataframe_geography_metadata(summary_metadata, uuid, response)
@@ -162,6 +170,18 @@ def update_dataframe_general_metadata(summary_metadata, uuid, response):
         if response["description"]:
             summary_metadata.at[uuid, "has_description"] = True
     return summary_metadata
+
+
+
+def update_dataframe_pupose_metadata(summary_metadata, uuid, response):
+    '''
+    Update purpose metadata columns of a dataset for a given row
+    '''
+    summary_metadata.at[uuid, "has_purpose"] = False
+    if "purpose" in response:
+        summary_metadata.at[uuid, "has_purpose"] = True
+    return summary_metadata
+
 
 
 def update_dataframe_contact_metadata(summary_metadata, uuid, response):
@@ -194,6 +214,17 @@ def update_dataframe_geography_metadata(summary_metadata, uuid, response):
             if "boundingBox" in geo:
                 if len(geo["boundingBox"].keys()) > 1:
                     summary_metadata.at[uuid, "has_bounding_box"] = True
+    return summary_metadata
+
+
+def update_dataframe_taxonomy_metadata(summary_metadata, uuid, response):
+    '''
+    Update taxonomy metadata columns of a dataset for a given row
+    '''
+    summary_metadata.at[uuid, "has_taxonomy"] = False
+    if "taxonomicCoverages" in response:
+        if len(response["taxonomicCoverages"]) >= 1:
+            summary_metadata.at[uuid, "has_taxonomy"] = True
     return summary_metadata
 
 
@@ -248,11 +279,13 @@ def update_summary_with_scores(summary_metadata, uuid, minimun_title_len):
     '''
     Caluclate score for everything and update summary
     '''
-    summary_metadata.at[uuid, "score_TD"] = score_general_parameters(summary_metadata, uuid, minimun_title_len)
-    summary_metadata.at[uuid, "score_E"] = score_email(summary_metadata, uuid)
-    summary_metadata.at[uuid, "score_G"] = score_geographic_coverage(summary_metadata, uuid)
-    summary_metadata.at[uuid, "score_T"] = score_time_coverage(summary_metadata, uuid)
-    summary_metadata.at[uuid, "score_M"] = score_method(summary_metadata, uuid)
+    summary_metadata.at[uuid, "score_what"] = score_general_parameters(summary_metadata, uuid, minimun_title_len)
+    summary_metadata.at[uuid, "score_what"] += score_taxonomy(summary_metadata, uuid)
+    summary_metadata.at[uuid, "score_why"] = score_purpose(summary_metadata, uuid)
+    summary_metadata.at[uuid, "score_who"] = score_email(summary_metadata, uuid)
+    summary_metadata.at[uuid, "score_where"] = score_geographic_coverage(summary_metadata, uuid)
+    summary_metadata.at[uuid, "score_when"] = score_time_coverage(summary_metadata, uuid)
+    summary_metadata.at[uuid, "score_how"] = score_method(summary_metadata, uuid)
     return summary_metadata
 
 
@@ -264,6 +297,26 @@ def score_general_parameters(summary_metadata, uuid, minimun_title_len):
     if summary_metadata.loc[uuid, "title_len"] > 0 or summary_metadata.loc[uuid, "has_description"]:
         score += 1
     if summary_metadata.loc[uuid, "title_len"] >= minimun_title_len:
+        score += 1
+    return score
+
+
+def score_taxonomy(summary_metadata, uuid):
+    '''
+    Calculate quality score for taxonomy
+    '''
+    score = 0
+    if summary_metadata.loc[uuid, "has_taxonomy"]:
+        score += 1
+    return score
+
+
+def score_purpose(summary_metadata, uuid):
+    '''
+    Calculate quality score for purpose
+    '''
+    score = 0
+    if summary_metadata.loc[uuid, "has_purpose"]:
         score += 1
     return score
 
@@ -299,8 +352,6 @@ def score_time_coverage(summary_metadata, uuid):
     score = 0
     if summary_metadata.loc[uuid, "number_of_dates"] > 0:
         score += 1
-    if summary_metadata.loc[uuid, "number_of_dates"] > 1:
-        score += 1
     return score
 
 
@@ -309,80 +360,47 @@ def score_method(summary_metadata, uuid):
     Calculate quality score for time coverage
     '''
     score = 0
-    if summary_metadata.loc[uuid, "has_qualityControl"] or summary_metadata.loc[uuid, "has_studyExtent"] or summary_metadata.loc[uuid, "has_sampling"] or summary_metadata.loc[uuid, "has_methodSteps"]:
+    if summary_metadata.loc[uuid, "has_qualityControl"] or summary_metadata.loc[uuid, "has_studyExtent"] or summary_metadata.loc[uuid, "has_sampling"]:
         score += 1
-    if summary_metadata.loc[uuid, "has_qualityControl"] and summary_metadata.loc[uuid, "has_studyExtent"] and summary_metadata.loc[uuid, "has_sampling"] and summary_metadata.loc[uuid, "has_methodSteps"]:
+    if summary_metadata.loc[uuid, "has_qualityControl"] and summary_metadata.loc[uuid, "has_studyExtent"] and summary_metadata.loc[uuid, "has_sampling"]:
         score += 1
     return score
 
 
-def plot_general_scores(my_summary, score_names, scores_colors):
+def make_individual_plot(ax, uuid, summary_metadata, score, base_radius, size, label = False):
     '''
-    Plot quality scores for a set of datasets
+    Plot piechart for metadata score for one dataset
     '''
-    scores_data = my_summary[list(score_names.keys())]
-    plt.close('all')
-    plt.figure(figsize=(12, 5))
-    ax1, ax2 = plt.subplot(122), plt.subplot(121)
+    my_labels = []
+    bars = []
+    circle_colors = []
 
-    golbal_scores = scores_data.mean(axis=1).round(0).value_counts(ascending=True)
-    colors_piechart = []
-    for col in golbal_scores.index.tolist():
-        colors_piechart.append(scores_colors[col])
-    ax1.pie(golbal_scores, colors=colors_piechart, autopct='%1.1f%%')
-    ax1.axis('equal')
-    ax1.set_title("Average scores")
-
-    placement = np.arange(len(score_names.keys()))
-    number = 0
-
-    ax2 = plt.barh(y=placement,
-                   width=scores_data[scores_data == number].count(),
-                   color=scores_colors[number])
-    number = 1
-    ax2 = plt.barh(y=placement,
-                   width=scores_data[scores_data == number].count(),
-                   color=scores_colors[number],
-                   left=scores_data[scores_data == number-1].count())
-    number = 2
-    ax2 = plt.barh(y=placement,
-                   width=scores_data[scores_data == number].count(),
-                   color=scores_colors[number],
-                   left=scores_data[scores_data == number-1].count()+scores_data[scores_data == number-2].count())
-
-    plt.title('Scores for datasets')
-    plt.xlabel("frequency")
-    plt.yticks(placement, list(score_names.values()))
-    plt.tight_layout()
+    for category in score:
+        my_labels.append(score[category]["label"])
+        bars.append(score[category]["length"])
+        circle_colors.append(score[category]["score"][summary_metadata.loc[uuid, category]])
+    if label:
+        ax.pie(bars, radius=base_radius, colors=circle_colors,
+               wedgeprops=dict(width=size, edgecolor='w'), labels=my_labels)
+    else:
+        ax.pie(bars, radius=base_radius, colors=circle_colors,
+               wedgeprops=dict(width=size, edgecolor='w'))
+    ax.set(aspect="equal")
+    return ax
 
 
-def plot_each_dataset_score(my_summary, score_names, scores_colors):
+def plot_entire_dataset(ax, summary_metadata, score, size=0.05):
     '''
-    Plot one column per dataset
+    Plot piechart for metadata score for an entire pandas dataset
     '''
-    scores_data = my_summary[list(score_names.keys())]
-    plt.figure(figsize=(15, 5))
-    placement = np.arange(len(score_names.keys()))
-    line = 0
-    for uuid in scores_data.sort_values(by=list(score_names.keys())).index.tolist():
-        number = 0
+    fig, ax = plt.subplots()
+    base_radius = summary_metadata.shape[0]*size
 
-        plt.barh(y=placement[scores_data.loc[uuid] == number],
-                 width=1,
-                 color=scores_colors[number],
-                 left=line)
-        number = 1
-        plt.barh(y=placement[scores_data.loc[uuid] == number],
-                 width=1,
-                 color=scores_colors[number],
-                 left=line)
-        number = 2
-        plt.barh(y=placement[scores_data.loc[uuid] == number],
-                 width=1,
-                 color=scores_colors[number],
-                 left=line)
-        line += 1
+    for uuid in summary_metadata.index.tolist():
+        if uuid == summary_metadata.index.tolist()[0]:
+            ax = make_individual_plot(ax, uuid, summary_metadata, score, base_radius, size, True)
+        else:
+            base_radius = base_radius-size
+            ax = make_individual_plot(ax, uuid, summary_metadata, score, base_radius, size)
+    plt.show()
 
-    plt.title('Scores for datasets')
-    plt.yticks(placement, list(score_names.values()))
-    plt.xlabel("frequency")
