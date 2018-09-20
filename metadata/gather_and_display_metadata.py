@@ -41,12 +41,11 @@ def get_metadata_from_API(sample_datasets=None, exclude=None):
     else:
         offset = 0
         step = 300
-        limit = offset + step
         end_of_records = False
         while not end_of_records:
             param = {
                 "offset": offset,
-                "limit": limit
+                "limit": step
             }
             response = requests.get("http://api.gbif.org/v1/dataset", param)
             response = response.json()
@@ -235,12 +234,13 @@ def update_dataframe_additionnal_info_metadata(summary_metadata, uuid, response)
         summary_metadata.at[uuid, "additionalInfo_len"] = 0.0
     return summary_metadata
 
+
 def count_categories(my_summary, variable_of_interest, label_for_zero_count):
     '''
     Counts items in list in a given column
     '''
     all_type = pd.Series(my_summary[variable_of_interest].sum()).value_counts()
-    my_type = all_type.append(pd.Series(len([my_summary[my_summary[variable_of_interest].apply(len) == 0]]),
+    my_type = all_type.append(pd.Series(len(my_summary[my_summary[variable_of_interest].apply(len) == 0]),
                                         index=[label_for_zero_count]))
     return my_type
 
