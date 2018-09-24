@@ -1,4 +1,16 @@
 	type	title_len	has_description	has_purpose	has_adm_or_metadata_contact	has_adm_or_metadata_contact_email	has_geographic_descrition	has_bounding_box	has_taxonomy	number_of_dates	has_qualityControl	has_studyExtent	has_sampling	has_methodSteps	score_what	score_why	score_who	score_where	score_when	score_how
+e5386a70-12e7-4dfe-a307-dbd547e167fb	OCCURRENCE	10	True	False	True	True	True	True	False	2.0	False	True	True	True	2.0	0.0	2.0	2.0	1.0	1.0
+560539d5-7f71-4fd8-998b-ba5b16a55568	OCCURRENCE	13	True	False	True	True	True	True	True	2.0	True	True	True	True	3.0	0.0	2.0	2.0	1.0	2.0
+2f51827d-8e69-4ecc-9318-d93bdba79986	OCCURRENCE	13	True	False	True	True	True	True	True	2.0	False	True	True	True	3.0	0.0	2.0	2.0	1.0	1.0
+231acf5a-0727-4315-b97d-957746e5f197	OCCURRENCE	2	True	False	True	True	True	True	True	1.0	True	True	True	True	2.0	0.0	2.0	2.0	1.0	2.0
+43460666-2eb6-4b2f-9819-0259534a32c3	OCCURRENCE	23	True	False	True	True	True	True	True	2.0	False	True	True	True	3.0	0.0	2.0	2.0	1.0	1.0
+8e4e5830-2f87-47d7-a265-3411f172a640	OCCURRENCE	1	True	True	True	True	True	True	True	2.0	True	True	True	True	2.0	1.0	2.0	2.0	1.0	2.0
+38012fb6-c779-4ef8-8b02-3f458709b5a0	OCCURRENCE	1	True	True	True	True	True	True	True	2.0	True	True	True	True	2.0	1.0	2.0	2.0	1.0	2.0
+c67decad-0b17-4383-9f12-1a87f6a6a6ca	OCCURRENCE	11	True	False	True	True	False	False	True	0.0	True	True	True	True	3.0	0.0	2.0	0.0	0.0	2.0
+1be624ad-2628-4a57-a68f-0fea6e3fba31	OCCURRENCE	16	True	False	True	True	True	True	True	4.0	False	True	True	True	3.0	0.0	2.0	2.0	1.0	1.0
+b248a869-84b8-4b3d-a63e-56bff369bfb7	CHECKLIST	7	True	False	True	True	True	True	False	0.0	False	True	True	True	2.0	0.0	2.0	2.0	0.0	1.0
+2e4f4ed1-77d0-4ee2-a895-6f894d3fcc13	OCCURRENCE	10	True	False	True	True	True	True	True	2.0	True	True	True	True	3.0	0.0	2.0	2.0	1.0	2.0
+f5ff3e05-fdd3-4ef8-8c0b-490965019feb	OCCURRENCE	13	True	False	True	True	True	True	True	2.0	False	True	True	True	3.0	0.0	2.0	2.0	1.0	1.0
 6183f1f7-0513-4587-bee6-cad11e23002d	OCCURRENCE	6	True	False	True	True	True	True	True	2.0	False	False	False	True	3.0	0.0	2.0	2.0	1.0	0.0
 53334055-d64e-48cd-8c83-2295d3891782	OCCURRENCE	17	True	False	True	True	False	False	False	0.0	False	False	False	False	2.0	0.0	2.0	0.0	0.0	0.0
 2dda31ff-f776-452f-9a4b-d5229f6e3494	METADATA	6	True	False	True	True	True	True	True	0.0	False	False	False	False	3.0	0.0	2.0	2.0	0.0	0.0
@@ -1254,7 +1266,6 @@ b4c773d1-9360-4cf3-a01b-42ecfb98bdd6	OCCURRENCE	3	True	False	True	True	True	True
 69a5c009-8beb-465b-9c27-55f9d8baf716	OCCURRENCE	13	True	False	True	True	True	True	True	2.0	False	False	False	False	3.0	0.0	2.0	2.0	1.0	0.0
 344129e7-9017-4afc-a70a-77a069e7e094	OCCURRENCE	4	True	False	True	True	True	True	True	2.0	True	True	True	True	3.0	0.0	2.0	2.0	1.0	2.0
 fc01c3fa-bb00-4f43-9d7a-38ca108a4e23	OCCURRENCE	4	True	False	True	True	True	True	True	2.0	True	True	True	True	3.0	0.0	2.0	2.0	1.0	2.0
-9ebd5074-b090-46cf-8071-940d500598c1	CHECKLIST	7	True	False	True	True	True	True	False	0.0	False	True	True	True	2.0	0.0	2.0	2.0	0.0	1.0
 6a97172b-09ed-4b18-9ade-3b3f4f649825	CHECKLIST	8	True	False	True	True	True	True	True	0.0	False	True	True	True	3.0	0.0	2.0	2.0	0.0	1.0
 9d1bf7a0-d252-45d4-a502-2ac69bd80155	CHECKLIST	5	True	False	True	True	True	True	True	4.0	False	True	True	True	3.0	0.0	2.0	2.0	1.0	1.0
 20749d89-7a35-4d64-b57f-a4ed5065f193	OCCURRENCE	40	True	False	True	True	True	True	True	2.0	False	True	True	True	3.0	0.0	2.0	2.0	1.0	1.0
@@ -1411,7 +1422,7 @@ f0c74a2c-4bd8-49d0-837a-92bb835fd2f3	OCCURRENCE	8	True	False	True	True	False	Fal
 fbb002cb-23a3-45c4-8e07-76f07a385085	OCCURRENCE	7	True	False	True	True	True	True	True	2.0	False	True	True	True	3.0	0.0	2.0	2.0	1.0	1.0
 cadacd9e-2431-4dc1-a46e-c6dacac2b24e	OCCURRENCE	6	True	False	True	True	True	True	True	2.0	False	True	True	True	3.0	0.0	2.0	2.0	1.0	1.0
 7fadb3a5-77af-4987-825e-8e48662cb507	OCCURRENCE	6	True	False	True	True	True	True	True	2.0	False	True	True	True	3.0	0.0	2.0	2.0	1.0	1.0
-8e8f2105-24bf-4304-a66b-9596705d3c81	OCCURRENCE	1	True	False	True	True	True	True	True	1.0	False	True	True	True	2.0	0.0	2.0	2.0	1.0	1.0
+8e8f2105-24bf-4304-a66b-9596705d3c81	OCCURRENCE	1	True	False	True	True	True	True	True	2.0	False	True	True	True	2.0	0.0	2.0	2.0	1.0	1.0
 4be877d9-b751-4c27-83e3-56eba52348d7	OCCURRENCE	2	True	False	True	True	True	True	True	2.0	True	True	True	True	2.0	0.0	2.0	2.0	1.0	2.0
 8497849e-773d-4d4b-b89c-221166879406	OCCURRENCE	5	True	False	True	True	True	True	True	2.0	True	True	True	True	3.0	0.0	2.0	2.0	1.0	2.0
 a65807ea-c9e7-4173-8ed2-8c41e1b3a0fe	OCCURRENCE	5	True	False	True	True	True	True	True	2.0	True	True	True	True	3.0	0.0	2.0	2.0	1.0	2.0
@@ -2042,7 +2053,7 @@ f96de520-5afe-456b-bf62-781a9aca5b62	OCCURRENCE	13	True	False	True	True	True	Tru
 b4a929e5-35bd-46d2-9ce7-e6ce5206eaec	OCCURRENCE	13	True	False	True	True	True	True	True	2.0	True	True	True	True	3.0	0.0	2.0	2.0	1.0	2.0
 707ae06a-750f-4322-b2d4-cdc64342d8eb	OCCURRENCE	11	True	False	True	True	True	True	True	2.0	True	True	True	True	3.0	0.0	2.0	2.0	1.0	2.0
 b87a59e8-12bd-490b-a6b0-e7db3bff2958	OCCURRENCE	4	True	False	True	True	True	True	True	1.0	False	False	False	False	3.0	0.0	2.0	2.0	1.0	0.0
-16f71cc7-bc90-42ab-bfcf-816501fa9027	OCCURRENCE	1	True	True	True	True	True	True	True	0.0	False	True	True	True	2.0	1.0	2.0	2.0	0.0	1.0
+16f71cc7-bc90-42ab-bfcf-816501fa9027	OCCURRENCE	3	True	True	True	True	True	True	True	0.0	False	True	True	True	3.0	1.0	2.0	2.0	0.0	1.0
 a53b8dbb-067c-49d3-83b8-d9d8f55f0e37	OCCURRENCE	1	True	False	True	True	False	False	False	0.0	False	False	False	False	1.0	0.0	2.0	0.0	0.0	0.0
 3e8822f0-6db7-4831-a370-c0cdd3d05538	OCCURRENCE	13	True	False	True	True	True	True	False	1.0	False	False	False	False	2.0	0.0	2.0	2.0	1.0	0.0
 8276c2d9-24ac-4f5c-8f79-06fcf31b9f70	OCCURRENCE	25	True	True	True	True	True	True	True	2.0	True	True	True	True	3.0	1.0	2.0	2.0	1.0	2.0
@@ -3346,7 +3357,6 @@ bb94d12c-8a31-4ed1-b554-92fe929ad6c4	OCCURRENCE	6	True	False	True	True	True	True
 126340b0-b00e-44df-9702-e6b6bcdabf27	OCCURRENCE	6	True	False	True	True	True	True	True	1.0	False	False	False	False	3.0	0.0	2.0	2.0	1.0	0.0
 ef2ce669-2030-40a9-95a8-5dc0b6e991ad	OCCURRENCE	4	True	False	True	True	True	True	True	2.0	False	False	False	False	3.0	0.0	2.0	2.0	1.0	0.0
 80eaf2ed-c5ec-4c36-a9b7-a0b7023a8edf	OCCURRENCE	7	True	True	True	True	True	True	True	0.0	False	True	True	True	3.0	1.0	2.0	2.0	0.0	1.0
-3f42d91f-acc2-46e2-a807-f117eab8b762	OCCURRENCE	11	True	True	True	True	True	True	True	2.0	True	True	True	True	3.0	1.0	2.0	2.0	1.0	2.0
 6f7057e4-3daf-4638-878e-b043244e6a97	CHECKLIST	7	True	False	True	True	True	True	True	0.0	False	False	False	False	3.0	0.0	2.0	2.0	0.0	0.0
 377b0deb-3dba-472b-97ca-965f7231ee38	OCCURRENCE	2	True	False	True	True	True	True	True	1.0	False	False	False	False	2.0	0.0	2.0	2.0	1.0	0.0
 e11f4c32-cb63-4fe3-bf14-c3828623229e	OCCURRENCE	8	True	False	True	True	False	False	False	0.0	False	False	False	False	2.0	0.0	2.0	0.0	0.0	0.0
@@ -4397,7 +4407,7 @@ f4a96009-f2f3-42d7-917c-8746096a69ee	CHECKLIST	17	False	False	True	True	False	Fa
 f617427f-16ee-4ece-b555-34b5fbff834b	CHECKLIST	16	False	False	True	True	False	False	False	0.0	False	False	False	False	2.0	0.0	2.0	0.0	0.0	0.0
 6f2b8f8d-4e29-40b8-a022-e3a0e642c89e	OCCURRENCE	12	True	True	True	True	True	True	True	2.0	True	True	True	True	3.0	1.0	2.0	2.0	1.0	2.0
 746dbba0-9a4c-4c0c-b462-fbced8436d42	OCCURRENCE	20	True	True	True	True	True	True	True	2.0	True	True	True	True	3.0	1.0	2.0	2.0	1.0	2.0
-8124cd73-ac84-43d2-ab39-1d80dc346525	OCCURRENCE	12	True	True	True	True	True	True	True	2.0	True	True	True	True	3.0	1.0	2.0	2.0	1.0	2.0
+8124cd73-ac84-43d2-ab39-1d80dc346525	OCCURRENCE	12	True	False	True	True	True	True	True	2.0	True	True	True	True	3.0	0.0	2.0	2.0	1.0	2.0
 8934ff78-0c43-4ca1-b617-e5e9aeb19e68	OCCURRENCE	13	True	False	True	True	True	True	True	2.0	False	False	False	True	3.0	0.0	2.0	2.0	1.0	0.0
 821cc27a-e3bb-4bc5-ac34-89ada245069d	OCCURRENCE	4	True	False	True	True	True	True	True	1.0	False	False	False	False	3.0	0.0	2.0	2.0	1.0	0.0
 c8681cc2-9d0a-4c5f-b620-5c753abfe2bc	OCCURRENCE	4	True	False	True	True	True	True	True	1.0	False	False	False	False	3.0	0.0	2.0	2.0	1.0	0.0
@@ -9316,7 +9326,6 @@ ff03d870-9168-11db-9f6c-b8a03c50a862	OCCURRENCE	3	True	False	True	True	False	Fal
 85ac3c18-f762-11e1-a439-00145eb45e9a	OCCURRENCE	3	False	False	True	True	False	False	False	0.0	False	False	False	False	2.0	0.0	2.0	0.0	0.0	0.0
 85ab1bf8-f762-11e1-a439-00145eb45e9a	OCCURRENCE	9	True	False	False	True	False	False	False	0.0	False	False	False	False	2.0	0.0	1.0	0.0	0.0	0.0
 85a347c0-f762-11e1-a439-00145eb45e9a	OCCURRENCE	3	True	False	True	True	False	False	False	0.0	False	False	False	False	2.0	0.0	2.0	0.0	0.0	0.0
-85a214d6-f762-11e1-a439-00145eb45e9a	OCCURRENCE	6	False	False	True	True	False	False	False	0.0	False	False	False	False	2.0	0.0	2.0	0.0	0.0	0.0
 859fe27e-f762-11e1-a439-00145eb45e9a	OCCURRENCE	9	True	False	False	True	False	False	False	0.0	False	False	False	False	2.0	0.0	1.0	0.0	0.0	0.0
 859d978a-f762-11e1-a439-00145eb45e9a	OCCURRENCE	6	True	False	True	True	False	False	False	0.0	False	False	False	False	2.0	0.0	2.0	0.0	0.0	0.0
 859c6946-f762-11e1-a439-00145eb45e9a	OCCURRENCE	3	False	False	True	True	False	False	False	0.0	False	False	False	False	2.0	0.0	2.0	0.0	0.0	0.0
