@@ -4,7 +4,7 @@ This is how you make a custom download for users wanting large or special files.
 
 ## Step 1. HUE or HIVE part
 
-Should be run in HUE or using HIVE command line. 
+Should be run in HUE or using HIVE command line. You need permission to access these places. 
 
 http://c5hue.gbif.org:8888/hue/editor?
 
@@ -12,9 +12,9 @@ Run this in the HUE editor to create a table.
 
 You will need a database with your name in place of `jwaller`.  You can create a datbase in HUE using the `+`. 
 
-First go to the prod_g (or latest occurrence database). 
+First go to the prod_g database (or latest occurrence hdfs database). 
 
-Create a table using. 
+Create a table using: 
 
 ```
 CREATE EXTERNAL TABLE jwaller.delimiter_csv (
@@ -25,7 +25,7 @@ ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t'
 STORED AS TEXTFILE LOCATION '/user/jwaller/delimiter.csv'
 ```
 
-Run in HUE your custom hive query. Make sure the names in the table you created above match the names you create in you custom query. 
+Now run in HUE your custom hive query. Make sure the names in the table you created above match the names you create in you custom query. 
 
 ```
 INSERT OVERWRITE TABLE jwaller.delimiter_csv
@@ -50,6 +50,11 @@ Finally run this command to copy the file into the `custom_download` folder.
 hdfs dfs -getmerge /user/jwaller/delimiter.csv customDownloadTest.tsv
 ```
 
+You should now be able to see your custom download at this webpage. 
+http://download.gbif.org/custom_download/
+
+You can now simply share the link with the user and they should be able to download the file. The link we created in the example should now be at: 
+http://download.gbif.org/custom_download/jwaller/customDownloadTest.tsv
 
 
 
