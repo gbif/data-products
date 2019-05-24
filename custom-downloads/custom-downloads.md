@@ -6,15 +6,11 @@ This is how you make a custom download for users wanting large or special files.
 
 Should be run in HUE or using HIVE command line. You need permission to access these places. 
 
-http://c5hue.gbif.org:8888/hue/editor?
+1. go to http://c5hue.gbif.org:8888/hue/editor?
+2. You will need a database with your name in place of `jwaller`.  You can create a datbase in HUE using the `+`. 
+3. Next go to the `prod_g` database (or latest occurrence hdfs database). 
 
-Run this in the HUE editor to create a table. 
-
-You will need a database with your name in place of `jwaller`.  You can create a datbase in HUE using the `+`. 
-
-First go to the prod_g database (or latest occurrence hdfs database). 
-
-Create a table using: 
+Run this in the HUE editor to create a table: 
 
 ```
 CREATE EXTERNAL TABLE jwaller.delimiter_csv (
