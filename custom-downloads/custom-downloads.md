@@ -36,19 +36,21 @@ FROM prod_g.occurrence_hdfs
 LIMIT 100
 ```
 
-## Step 2. 
+## Step 2. Copying the table to production server
 
 Now we will copy the file into the production server in order to share the file with others. 
 
 1. Log onto C5. `ssh jwaller@c5gateway-vh.gbif.org`
-2. 
-2. You can also make `mkdir jwaller`
+2. Go to `cd /mnt/auto/misc/download.gbif.org/custom_download`
+3. You can now optionally make a personal directory `mkdir jwaller`
 
-
-
-
-```
-
-hdfs dfs -getmerge /user/mgrosjean/oldName.csv newName.tsv
+Finally run this command to copy the file into the `custom_download` folder. 
 
 ```
+hdfs dfs -getmerge /user/jwaller/delimiter.csv customDownloadTest.tsv
+```
+
+
+
+
+
