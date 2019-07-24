@@ -78,12 +78,14 @@ Now create a temporary table from the **mergedDf** dataframe. We need this table
 mergedDf.createOrReplaceTempView("non_fish_temp");
 ```
 
-The next part will create a new table external table. There is probably a more clever way to do this but I do not know how to do it. This will create an empty **external** table called **non_fish** with the same column names as **mergedDf**. 
+The next part will create a new table external table. There is probably a more clever way to do this but I do not know how to do it. In any case, this will create an empty **external** table called **non_fish** with the same column names as **mergedDf**. This eternal table will be accessbile to `hdfs dfs -getmerge`, which we will use later to combine the distributed file into a **single file**. 
 
 ```
 val x = mergedDf.columns.toSeq.mkString(" STRING, ");
 val hive_sql = "CREATE EXTERNAL TABLE jwaller.non_fish (" + x + " STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' STORED AS TEXTFILE LOCATION '/user/jwaller/non_fish.csv'";
 sqlContext.sql(hive_sql);
+
+sqlContext.sql("show tables from jwaller").show(); // check result
 ```
 
 
