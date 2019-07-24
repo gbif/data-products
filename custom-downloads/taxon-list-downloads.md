@@ -1,4 +1,4 @@
-# Long taxonkey list download
+# Long taxonkey list downloads
 
 Sometimes users want to download a lot of taxonkeys like **>40K in some cases**. This is not possible to do over via the website or using curl or something like that. 
 
@@ -78,6 +78,13 @@ Now create a temporary table from the **mergedDf** dataframe. We need this table
 mergedDf.createOrReplaceTempView("non_fish_temp");
 ```
 
+The next part will create a new table external table. There is probably a more clever way to do this but I do not know how to do it. This will create an empty **external** table called **non_fish** with the same column names as **mergedDf**. 
+
+```
+val x = mergedDf.columns.toSeq.mkString(" STRING, ");
+val hive_sql = "CREATE EXTERNAL TABLE jwaller.non_fish (" + x + " STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' STORED AS TEXTFILE LOCATION '/user/jwaller/non_fish.csv'";
+sqlContext.sql(hive_sql);
+```
 
 
 
