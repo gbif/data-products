@@ -88,5 +88,24 @@ sqlContext.sql(hive_sql);
 sqlContext.sql("show tables from jwaller").show(); // check result
 ```
 
+Now I take the data from the temporary table **non_fish_temp** and stick it into **non_fish**. 
+```
+sqlContext.sql(s"INSERT OVERWRITE TABLE jwaller.non_fish SELECT * FROM non_fish_temp");
+sqlContext.sql("SELECT * FROM jwaller.non_fish").count(); // check result
+```
+
+**This is the end of the spark shell part**
+
+# Final steps 
+
+These steps are to be excuted inside a normal terminal shell but still on the remote server of course. 
+
+1. Go to `cd /mnt/auto/misc/download.gbif.org/custom_download/jwaller/`
+2. Run to combine the file `hdfs dfs -getmerge /user/jwaller/non_fish.csv non_fish_export.tsv`
+3. Optionally clean up weird **\N** instead of null `sed -i 's#\\N##g' non_fish_export.tsv`
+4. You can also add a **header** to the file like this. I am not sure if this will work for really large files.  `sed -i '1i nonfish_taxonkey\ttaxonkey\tpublishingorgkey\tdatasetkey\trecordedby\teventdate\tinstitutioncode\tcollectioncode\tcatalognumber\tbasisofrecord\tidentifiedby\tdateidentified\tv_scientificname\tv_scientificnameauthorship\tscientificname\tkingdom\tphylum\tclass\ttaxonrank\tfamily\tgenus\tcountrycode\tlocality\tcounty\tcontinent\tstateprovince\tpublishingcountry\tdecimallatitude\tdecimallongitude\tv_coordinateprecision\thasgeospatialissues\tdepth\tdepthaccuracy\tv_maximumdepthinmeters\tv_minimumdepthinmeters\televation\televationaccuracy\tv_maximumelevationinmeters\tv_minimumelevationinmeters\tgbifid\tspecieskey\ttaxonid\text_multimedia' non_fish_export.tsv`
+5. Finally 
+
+
 
 
