@@ -1,10 +1,10 @@
 # Long taxonkey list downloads
 
-Sometimes users want to download a lot of taxonkeys like **>40K in some cases**. This is not possible to do over via the website or using curl or something like that. 
+Sometimes users want to download a lot of taxonkeys like **>40K in some cases**. This is not possible to do via the website or using curl or something like that. 
 
-> Note this walk through is for internal use and a regular user will not be able to do this (although see [here](https://github.com/ropensci/rgbif/issues/362) if you still want to make a large taxonkey download yourself). 
+> Note this walk through is for internal use and a regular user will not be able to do this (although see [here](https://github.com/ropensci/rgbif/issues/362) if you still want to make a somewhat large taxonkey download yourself). 
 
-If the taxonkey list is less than around 5K [see dicussion here](https://github.com/ropensci/rgbif/issues/362) then it is probably easier to do a download using a http GET request. It might also be possible to break up big downloads into 5K-taxonkey chunks, but if even that is too many downloads if the list is very long. A taxonkey list custom download might be worth while or still requested. 
+If the taxonkey list is less than around 5K [see dicussion here](https://github.com/ropensci/rgbif/issues/362) then it is probably easier to do a download using a http GET request. It might also be possible to break up big downloads into ~5K-taxonkey chunks, but if even that is too many downloads, a taxonkey list custom download might be worth while or still requested. 
  
 # Making a long taxonkey-list downloads 
 
@@ -50,15 +50,15 @@ Now I will load data into the table. Make sure you started your `spark2-shell` s
 ```
 sqlContext.sql(s"LOAD DATA LOCAL INPATH './taxonkeys.txt' OVERWRITE INTO TABLE jwaller.interpreted_nonfish_taxonkeys");
 ```
-The data is now loaded. You could look at now inside HUE **jwaller.interpreted_nonfish_taxonkeys**. 
+The data is now loaded. You could look at the table inside HUE **jwaller.interpreted_nonfish_taxonkeys**. 
 
-Next we will make the data available as a dataframe **nonfish** in spark. I added `.distinct()` onto the end of the file because we only want unique taxonkeys. I am pretty sure duplicate taxonkeys will join to make duplicate records later on. 
+Next we will make the data available as a dataframe **nonfish** in spark. I added `.distinct()` onto the end of the command because we only want unique taxonkeys. Duplicate taxonkeys will join to make duplicate records later on. 
 
 ```
 val nonfish = sqlContext.sql("SELECT * FROM jwaller.interpreted_nonfish_taxonkeys").distinct();
 ```
 
-Since the occurrence table has a **>400 columns**, we need to define the columns that we **want to keep**. There is probably no clever way to do this since we simply need to define what we want in a big long list. I will plug this in later into a select expression. `sqlContext.sql("SELECT " + columnsToKeep + " FROM uat.occurrence_hdfs");`. Switch `uat` to the production table if needed. 
+Since the occurrence table has a **>400 columns**, we need to define the columns that we **want to keep**. There is probably no clever way to do this **since we simply need to define what we want in a big long list**. I will plug this in later into a select expression. `sqlContext.sql("SELECT " + columnsToKeep + " FROM uat.occurrence_hdfs");`. Switch `uat` to the production table if needed. 
 
 ```
 val columnsToKeep = "taxonkey,publishingorgkey,datasetkey,recordedby,eventdate,institutioncode,collectioncode,catalognumber,basisofrecord,identifiedby,dateidentified,v_scientificname,v_scientificnameauthorship,scientificname,kingdom,phylum,class,taxonrank,family,genus,countrycode,locality,county,continent,stateprovince,publishingcountry,decimallatitude,decimallongitude,v_coordinateprecision,hasgeospatialissues,depth,depthaccuracy,v_maximumdepthinmeters,v_minimumdepthinmeters,elevation,elevationaccuracy,v_maximumelevationinmeters,v_minimumelevationinmeters,gbifid,specieskey,taxonid,ext_multimedia";
@@ -66,7 +66,7 @@ val columnsToKeep = "taxonkey,publishingorgkey,datasetkey,recordedby,eventdate,i
 val D = sqlContext.sql("SELECT " + columnsToKeep + " FROM uat.occurrence_hdfs");
 ```
 
-Now we will **join** everything together to keep just the keys that we want. This should be a much smaller dataframe. You can check by using `mergedDf.count();`. Remember we defined **nonfish_taxonkey** at the beginning when we created the **interpreted_nonfish_taxonkeys** table.
+Now we will **join** everything together to keep just the keys that we want. This should be a much smaller dataframe than the **occurrence_hdfs** table. You can check by using `mergedDf.count();`. Remember we defined **nonfish_taxonkey** at the beginning when we created the **interpreted_nonfish_taxonkeys** table.
 
 ```
 val mergedDf = nonfish.join(D,D("taxonkey") === nonfish("nonfish_taxonkey"));
@@ -78,7 +78,7 @@ Now create a temporary table from the **mergedDf** dataframe. We need this table
 mergedDf.createOrReplaceTempView("non_fish_temp");
 ```
 
-The next part will create a new table external table. There is probably a more clever way to do this but I do not know how to do it. In any case, this will create an empty **external** table called **non_fish** with the same column names as **mergedDf**. This eternal table will be accessbile to `hdfs dfs -getmerge`, which we will use later to combine the distributed file into a **single file**. 
+The next part will create a new table external table. This will create an empty **external** table called **non_fish** with the same column names as **mergedDf**. This eternal table will be accessbile to `hdfs dfs -getmerge`, which we will use later to combine the distributed file into a **single file**. 
 
 ```
 val x = mergedDf.columns.toSeq.mkString(" STRING, ");
@@ -88,7 +88,7 @@ sqlContext.sql(hive_sql);
 sqlContext.sql("show tables from jwaller").show(); // check result
 ```
 
-Now I take the data from the temporary table **non_fish_temp** and stick it into **non_fish**. 
+Now I take the data from the temporary table **non_fish_temp** and copy it into **non_fish**. 
 ```
 sqlContext.sql(s"INSERT OVERWRITE TABLE jwaller.non_fish SELECT * FROM non_fish_temp");
 sqlContext.sql("SELECT * FROM jwaller.non_fish").count(); // check result
@@ -108,6 +108,7 @@ These steps are to be excuted inside a normal terminal shell but still on the re
 sed -i '1i nonfish_taxonkey\ttaxonkey\tpublishingorgkey\tdatasetkey\trecordedby\teventdate\tinstitutioncode\tcollectioncode\tcatalognumber\tbasisofrecord\tidentifiedby\tdateidentified\tv_scientificname\tv_scientificnameauthorship\tscientificname\tkingdom\tphylum\tclass\ttaxonrank\tfamily\tgenus\tcountrycode\tlocality\tcounty\tcontinent\tstateprovince\tpublishingcountry\tdecimallatitude\tdecimallongitude\tv_coordinateprecision\thasgeospatialissues\tdepth\tdepthaccuracy\tv_maximumdepthinmeters\tv_minimumdepthinmeters\televation\televationaccuracy\tv_maximumelevationinmeters\tv_minimumelevationinmeters\tgbifid\tspecieskey\ttaxonid\text_multimedia' non_fish_export.tsv
 ```
 5. Finally **zip** the file. `zip non_fish_export.zip non_fish_export.tsv`
+6. You can also remove the unzipped version `rm non_fish_export.tsv`
 
 The file should now be viewable here: http://download.gbif.org/custom_download/
 
