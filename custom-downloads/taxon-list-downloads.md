@@ -6,7 +6,55 @@ Sometimes users want to download a lot of taxonkeys like **>40K in some cases**.
 
 If the taxonkey list is less than around 5K [see dicussion here](https://github.com/ropensci/rgbif/issues/362) then it is probably easier to do a download using a http GET request. It might also be possible to break up big downloads into ~5K-taxonkey chunks, but if even that is too many downloads, a taxonkey list custom download might be worth while or still requested. 
  
-# Making a long taxonkey-list downloads 
+# Matching the names. 
+
+Users will not always provide you with taxonkey lists. Often they will give you just a list of names. Therefore it is necessary to get taxon keys before moving forward. 
+
+I have a included a command-line-tool written by Marie that will match `species-matching-gbif-api.py` names to the backbone.
+
+1. Install python 3
+2. `pip install pandas` `pip install requests` 
+3. `python species-matching-gbif-api.py --in yourInputFile.txt --out output.txt` 
+
+Where `input.txt` is the names given to you by the user separated by a space. With **scientificName** as the column name. 
+
+Sample `input.txt` file: 
+
+```
+scientificName
+Aaptos suberitoides 
+Aaptos pernucleata 
+Aaptos lobata 
+Aaptos lithophaga 
+Aaptos laxosuberites 
+Aaptos duchassaingi 
+Aaptos chromis 
+Aaptos bergmanni 
+Aaptos adriatica 
+Aaptos aaptos 
+Aartsenia candida
+Abraliopsis hoylei pfefferi
+```
+
+I cleaned up the `output.txt` file using the following R code. 
+
+```
+library(dplyr)
+library(tibble)
+
+D = data.table::fread("C:/Users/ftw712/Desktop/non_fish_download/output.txt") %>% as_tibble()
+
+good = D %>% 
+select(usageKey,rank,canonicalName,inputName,matchType) %>%
+filter(matchType == "EXACT") %>%
+filter(rank == "SPECIES" | rank == "SUBSPECIES") %>% # only keep species if the user gave you species names.
+unique() %>% 
+select(interpreted_taxonkey=usageKey,interpreted_rank=rank,interpreted_name =canonicalName,your_original_name = inputName,name_match_quality=matchType)
+
+readr::write_tsv(good,path="interpreted_names.tsv",col_names=FALSE)
+```
+
+# Making a long taxonkey-list exports 
 
 In this example I will be using a list for a **non_fish_export**. The `taxonkeys.txt` file can be found [here](https://github.com/gbif/data-products/blob/master/custom-downloads/taxonkeylist.txt). I will be using **Spark** but probably this could just as easily be achieved using HIVE. 
 
@@ -61,7 +109,7 @@ val nonfish = sqlContext.sql("SELECT * FROM jwaller.interpreted_nonfish_taxonkey
 Since the occurrence table has a **>400 columns**, we need to define the columns that we **want to keep**. There is probably no clever way to do this **since we simply need to define what we want in a big long list**. I will plug this in later into a select expression. `sqlContext.sql("SELECT " + columnsToKeep + " FROM uat.occurrence_hdfs");`. Switch `uat` to the production table if needed. 
 
 ```
-val columnsToKeep = "taxonkey,publishingorgkey,datasetkey,recordedby,eventdate,institutioncode,collectioncode,catalognumber,basisofrecord,identifiedby,dateidentified,v_scientificname,v_scientificnameauthorship,scientificname,kingdom,phylum,class,taxonrank,family,genus,countrycode,locality,county,continent,stateprovince,publishingcountry,decimallatitude,decimallongitude,v_coordinateprecision,hasgeospatialissues,depth,depthaccuracy,v_maximumdepthinmeters,v_minimumdepthinmeters,elevation,elevationaccuracy,v_maximumelevationinmeters,v_minimumelevationinmeters,gbifid,specieskey,taxonid,ext_multimedia";
+val columnsToKeep = "taxonkey,publishingorgkey,datasetkey,recordedby,eventdate,institutioncode,collectioncode,catalognumber,basisofrecord,identifiedby,dateidentified,v_scientificname,v_scientificnameauthorship,scientificname,kingdom,phylum,class,taxonrank,family,genus,countrycode,locality,county,continent,stateprovince,publishingcountry,decimallatitude,decimallongitude,v_coordinateprecision,hasgeospatialissues,depth,depthaccuracy,v_maximumdepthinmeters,v_minimumdepthinmeters,elevation,elevationaccuracy,v_maximumelevationinmeters,v_minimumelevationinmeters,gbifid,specieskey,taxonid";
 
 val D = sqlContext.sql("SELECT " + columnsToKeep + " FROM uat.occurrence_hdfs");
 ```
