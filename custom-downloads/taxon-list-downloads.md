@@ -6,7 +6,7 @@ Sometimes users want to download a lot of taxonkeys like **>40K in some cases**.
 
 If the taxonkey list is less than around 5K [see dicussion here](https://github.com/ropensci/rgbif/issues/362) then it is probably easier to do a download using a http GET request. It might also be possible to break up big downloads into ~5K-taxonkey chunks, but if even that is too many downloads, a taxonkey list custom download might be worth while or still requested. 
  
-# Matching the names. 
+# Matching the names
 
 Users will not always provide you with taxonkey lists. Often they will give you just a list of names. Therefore it is necessary to get taxon keys before moving forward. 
 
