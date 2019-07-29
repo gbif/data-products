@@ -51,34 +51,42 @@ filter(rank == "SPECIES" | rank == "SUBSPECIES") %>% # only keep species if the 
 unique() %>% 
 select(interpreted_taxonkey=usageKey,interpreted_rank=rank,interpreted_name =canonicalName,your_original_name = inputName,name_match_quality=matchType)
 
-readr::write_tsv(good,path="interpreted_names.tsv",col_names=FALSE)
+readr::write_tsv(good,path="interpreted_names.tsv",col_names=FALSE) # do not include the header because we will import into HIVE
 ```
+
+
+
 
 # Making a long taxonkey-list exports 
 
-In this example I will be using a list for a **non_fish_export**. The `taxonkeys.txt` file can be found [here](https://github.com/gbif/data-products/blob/master/custom-downloads/taxonkeylist.txt). I will be using **Spark** but probably this could just as easily be achieved using HIVE. 
+In this example I will be using a list for a **non_fish_export**. The I will be using **Spark** but probably this could just as easily be achieved using HIVE. 
 
-`taxonkey.txt` sample:
+**interpreted_nonfish_names.tsv** sample: 
+
 ```
-2242217
-2242221
-2242221
-2225726
-7912255
-2267949
-2268007
-2268011
-7598638
-4343190
-4582637
-4582637
-2242412
-2242415
-2265679
-2265681
+2251105	SPECIES	Aaptos suberitoides	Aaptos suberitoides	EXACT
+2251115	SPECIES	Aaptos pernucleata	Aaptos pernucleata	EXACT
+9404628	SPECIES	Aaptos lobata	Aaptos lobata	EXACT
+2250311	SPECIES	Aaptos lithophaga	Aaptos lithophaga	EXACT
+2251103	SPECIES	Aaptos laxosuberites	Aaptos laxosuberites	EXACT
+2251121	SPECIES	Aaptos duchassaingi	Aaptos duchassaingi	EXACT
+2251108	SPECIES	Aaptos chromis	Aaptos chromis	EXACT
+2251118	SPECIES	Aaptos bergmanni	Aaptos bergmanni	EXACT
+2251093	SPECIES	Aaptos adriatica	Aaptos adriatica	EXACT
+2251089	SPECIES	Aaptos aaptos	Aaptos aaptos	EXACT
+4358933	SPECIES	Aartsenia candida	Aartsenia candida	EXACT
+2213043	SPECIES	Aatolana springthorpei	Aatolana springthorpei	EXACT
+2213040	SPECIES	Aatolana schioedtei	Aatolana schioedtei	EXACT
+2213042	SPECIES	Aatolana rapax	Aatolana rapax	EXACT
+2112116	SPECIES	Abacola holothuriae	Abacola holothuriae	EXACT
+6468036	SPECIES	Abathescalpellum fissum	Abathescalpellum fissum	EXACT
+6521665	SPECIES	Abdopus undulatus	Abdopus undulatus	EXACT
+6521661	SPECIES	Abdopus tonganus	Abdopus tonganus	EXACT
+8704058	SPECIES	Abdopus tenebricus	Abdopus tenebricus	EXACT
+6521664	SPECIES	Abdopus horridus	Abdopus horridus	EXACT
 ```
 
-1. Copy `taxonkeys.txt` onto `scp -r /cygdrive/c/Users/ftw712/Desktop/taxonkeys.txt jwaller@c4gateway-vh.gbif.org:/home/jwaller/`
+1. Copy `interpreted_nonfish_names.tsv` onto `scp -r /cygdrive/c/Users/ftw712/Desktop/interpreted_nonfish_names.tsv jwaller@c4gateway-vh.gbif.org:/home/jwaller/`
 2. Create your own person database if does not exist use `+` button in HUE. 
 3. Log on to server `ssh jwaller@c4gateway-vh.gbif.org`
 4. Start `spark2-shell` scala shell
@@ -87,19 +95,16 @@ Do the following inside a `spark2-shell` session:
 ```
 val sqlContext = new org.apache.spark.sql.SQLContext(sc);
 ```
-
-
-
-
-Create empty table where we will load our `taxonkeys.txt` 
+Create empty table where we will load our **interpreted_nonfish_names.tsv** 
 ```
-sqlContext.sql(s"CREATE TABLE jwaller.interpreted_nonfish_taxonkeys (nonfish_taxonkey INT)");
+val schema = "interpreted_taxonkey INT, interpreted_rank STRING, interpreted_name STRING, your_original_name STRING, name_match_quality STRING";
+val create_table_sql = "CREATE TABLE jwaller.interpreted_nonfish_names (" + schema + ") row format delimited fields terminated by '\t' stored as textfile";
 ```
 You will now be able to see this table **interpreted_nonfish_taxonkeys** if you run `sqlContext.sql("show tables from jwaller").show();`. You could also view it inside HUE if you click the refresh button. You can delete this table by using `sqlContext.sql(s"DROP TABLE IF EXISTS jwaller.interpreted_nonfish_taxonkeys");`
 
-Now I will load data into the table. Make sure you started your `spark2-shell` session in the same directory that `taxonkeys.txt` is located. 
+Now I will load data into the table. Make sure you started your `spark2-shell` session in the same directory that **interpreted_nonfish_names.tsv** is located. 
 ```
-sqlContext.sql(s"LOAD DATA LOCAL INPATH './taxonkeys.txt' OVERWRITE INTO TABLE jwaller.interpreted_nonfish_taxonkeys");
+sqlContext.sql(s"LOAD DATA LOCAL INPATH './interpreted_nonfish_names.tsv' OVERWRITE INTO TABLE jwaller.interpreted_nonfish_taxonkeys");
 ```
 The data is now loaded. You could look at the table inside HUE **jwaller.interpreted_nonfish_taxonkeys**. 
 
@@ -109,7 +114,7 @@ Next we will make the data available as a dataframe **nonfish** in spark. I adde
 val nonfish = sqlContext.sql("SELECT * FROM jwaller.interpreted_nonfish_taxonkeys").distinct();
 ```
 
-Since the occurrence table has a **>400 columns**, we need to define the columns that we **want to keep**. There is probably no clever way to do this **since we simply need to define what we want in a big long list**. I will plug this in later into a select expression. `sqlContext.sql("SELECT " + columnsToKeep + " FROM uat.occurrence_hdfs");`. Switch `uat` to the production table if needed. 
+Since the occurrence table has a **>400 columns**, we need to define the columns that we **want to keep**. There is probably no clever way to do this **since we simply need to define what we want in a big long list**. I will plug this in later into a select expression. `sqlContext.sql("SELECT " + columnsToKeep + " FROM uat.occurrence_hdfs");`. Switch `uat` to the production table if needed. **Make sure to avoid using the multi-media column!**
 
 ```
 val columnsToKeep = "taxonkey,publishingorgkey,datasetkey,recordedby,eventdate,institutioncode,collectioncode,catalognumber,basisofrecord,identifiedby,dateidentified,v_scientificname,v_scientificnameauthorship,scientificname,kingdom,phylum,class,taxonrank,family,genus,countrycode,locality,county,continent,stateprovince,publishingcountry,decimallatitude,decimallongitude,v_coordinateprecision,hasgeospatialissues,depth,depthaccuracy,v_maximumdepthinmeters,v_minimumdepthinmeters,elevation,elevationaccuracy,v_maximumelevationinmeters,v_minimumelevationinmeters,gbifid,specieskey,taxonid";
@@ -127,6 +132,9 @@ Now create a temporary table from the **mergedDf** dataframe. We need this table
 
 ```
 mergedDf.createOrReplaceTempView("non_fish_temp");
+
+// check result and compare with portal
+// mergedDf.groupBy("interpreted_taxonkey","taxonkey").agg(count(lit(1)).alias("num_of_occ")).orderBy(desc("num_of_occ"));
 ```
 
 The next part will create a new table external table. This will create an empty **external** table called **non_fish** with the same column names as **mergedDf**. This eternal table will be accessbile to `hdfs dfs -getmerge`, which we will use later to combine the distributed file into a **single file**. 
@@ -156,7 +164,7 @@ These steps are to be excuted inside a normal terminal shell but still on the re
 3. Optionally clean up weird **\N** instead of null `sed -i 's#\\N##g' non_fish_export.tsv`
 4. You can also add a **header** to the file like this. I am not sure if this will work for really large files.  
 ```
-sed -i '1i nonfish_taxonkey\ttaxonkey\tpublishingorgkey\tdatasetkey\trecordedby\teventdate\tinstitutioncode\tcollectioncode\tcatalognumber\tbasisofrecord\tidentifiedby\tdateidentified\tv_scientificname\tv_scientificnameauthorship\tscientificname\tkingdom\tphylum\tclass\ttaxonrank\tfamily\tgenus\tcountrycode\tlocality\tcounty\tcontinent\tstateprovince\tpublishingcountry\tdecimallatitude\tdecimallongitude\tv_coordinateprecision\thasgeospatialissues\tdepth\tdepthaccuracy\tv_maximumdepthinmeters\tv_minimumdepthinmeters\televation\televationaccuracy\tv_maximumelevationinmeters\tv_minimumelevationinmeters\tgbifid\tspecieskey\ttaxonid' non_fish_export.tsv
+sed -i '1i interpreted_taxonkey\tinterpreted_rank\tinterpreted_name\tyour_original_name\tname_match_quality\ttaxonkey\tpublishingorgkey\tdatasetkey\trecordedby\teventdate\tinstitutioncode\tcollectioncode\tcatalognumber\tbasisofrecord\tidentifiedby\tdateidentified\tv_scientificname\tv_scientificnameauthorship\tscientificname\tkingdom\tphylum\tclass\ttaxonrank\tfamily\tgenus\tcountrycode\tlocality\tcounty\tcontinent\tstateprovince\tpublishingcountry\tdecimallatitude\tdecimallongitude\tv_coordinateprecision\thasgeospatialissues\tdepth\tdepthaccuracy\tv_maximumdepthinmeters\tv_minimumdepthinmeters\televation\televationaccuracy\tv_maximumelevationinmeters\tv_minimumelevationinmeters\tgbifid\tspecieskey\ttaxonid' non_fish_export.tsv
 ```
 5. Finally **zip** the file. `zip non_fish_export.zip non_fish_export.tsv`
 6. You can also remove the unzipped version `rm non_fish_export.tsv`
