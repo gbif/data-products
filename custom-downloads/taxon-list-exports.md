@@ -1,4 +1,4 @@
-# Long taxonkey list downloads
+# Long taxonkey list downloads/exports
 
 Sometimes users want to download a lot of taxonkeys like **>40K in some cases**. This is not possible to do via the website or using curl or something like that. 
 
@@ -88,6 +88,9 @@ Do the following inside a `spark2-shell` session:
 val sqlContext = new org.apache.spark.sql.SQLContext(sc);
 ```
 
+
+
+
 Create empty table where we will load our `taxonkeys.txt` 
 ```
 sqlContext.sql(s"CREATE TABLE jwaller.interpreted_nonfish_taxonkeys (nonfish_taxonkey INT)");
@@ -153,7 +156,7 @@ These steps are to be excuted inside a normal terminal shell but still on the re
 3. Optionally clean up weird **\N** instead of null `sed -i 's#\\N##g' non_fish_export.tsv`
 4. You can also add a **header** to the file like this. I am not sure if this will work for really large files.  
 ```
-sed -i '1i nonfish_taxonkey\ttaxonkey\tpublishingorgkey\tdatasetkey\trecordedby\teventdate\tinstitutioncode\tcollectioncode\tcatalognumber\tbasisofrecord\tidentifiedby\tdateidentified\tv_scientificname\tv_scientificnameauthorship\tscientificname\tkingdom\tphylum\tclass\ttaxonrank\tfamily\tgenus\tcountrycode\tlocality\tcounty\tcontinent\tstateprovince\tpublishingcountry\tdecimallatitude\tdecimallongitude\tv_coordinateprecision\thasgeospatialissues\tdepth\tdepthaccuracy\tv_maximumdepthinmeters\tv_minimumdepthinmeters\televation\televationaccuracy\tv_maximumelevationinmeters\tv_minimumelevationinmeters\tgbifid\tspecieskey\ttaxonid\text_multimedia' non_fish_export.tsv
+sed -i '1i nonfish_taxonkey\ttaxonkey\tpublishingorgkey\tdatasetkey\trecordedby\teventdate\tinstitutioncode\tcollectioncode\tcatalognumber\tbasisofrecord\tidentifiedby\tdateidentified\tv_scientificname\tv_scientificnameauthorship\tscientificname\tkingdom\tphylum\tclass\ttaxonrank\tfamily\tgenus\tcountrycode\tlocality\tcounty\tcontinent\tstateprovince\tpublishingcountry\tdecimallatitude\tdecimallongitude\tv_coordinateprecision\thasgeospatialissues\tdepth\tdepthaccuracy\tv_maximumdepthinmeters\tv_minimumdepthinmeters\televation\televationaccuracy\tv_maximumelevationinmeters\tv_minimumelevationinmeters\tgbifid\tspecieskey\ttaxonid' non_fish_export.tsv
 ```
 5. Finally **zip** the file. `zip non_fish_export.zip non_fish_export.tsv`
 6. You can also remove the unzipped version `rm non_fish_export.tsv`
