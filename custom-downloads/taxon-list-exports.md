@@ -147,6 +147,25 @@ sqlContext.sql(hive_sql);
 sqlContext.sql("show tables from jwaller").show(); // check result
 ```
 
+Optionally you could use this custom function. Be sure to replace `jwaller` with your database. 
+
+```
+import org.apache.spark.sql.DataFrame;
+
+val make_external_table = (df: DataFrame, tableName: String) => { 
+df.createOrReplaceTempView(tableName + "_temp");
+val x = df.columns.toSeq.mkString(" STRING, ");
+val create_sql = "CREATE EXTERNAL TABLE jwaller." + tableName + " (" + x + " STRING) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' STORED AS TEXTFILE LOCATION '/user/jwaller/" + tableName + ".csv'";
+val overwrite_sql = "INSERT OVERWRITE TABLE jwaller." + tableName + " SELECT * FROM " + tableName + "_temp";
+
+println(create_sql);
+println(overwrite_sql);
+
+sqlContext.sql(create_sql);
+sqlContext.sql(overwrite_sql);
+}
+```
+
 Now I take the data from the temporary table **non_fish_temp** and copy it into **non_fish**. 
 ```
 sqlContext.sql(s"INSERT OVERWRITE TABLE jwaller.non_fish SELECT * FROM non_fish_temp");
