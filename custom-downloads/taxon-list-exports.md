@@ -5,7 +5,49 @@ Sometimes users want to download a lot of taxonkeys like **>40K in some cases**.
 > Note this walk through is for internal use and a regular user will not be able to do this (although see [here](https://github.com/ropensci/rgbif/issues/362) if you still want to make a somewhat large taxonkey download yourself). 
 
 If the taxonkey list is less than around 5K [see dicussion here](https://github.com/ropensci/rgbif/issues/362) then it is probably easier to do a download using a http GET request. It might also be possible to break up big downloads into ~5K-taxonkey chunks, but if even that is too many downloads, a taxonkey list custom download might be worth while or still requested. 
- 
+
+# R script to download a small amount of names 
+
+
+```
+# pipeline for processing sci names -> downloads 
+Dir = "" # the location of your cleanNames.csv and where you want to save the output files 
+
+data.table::fread(Dir %+% "cleanNames.csv") %>% 
+pull(sciname) %>% 
+get_gbifid_(method="backbone") %>% # use this to get all matches from taxize R package
+imap(~ .x %>% mutate(original_sciname = .y)) %>% # add original name back into data.frame
+bind_rows() %T>%  # combine all data.frames into one 
+readr::write_tsv(path = Dir %+% "all_matches.tsv") %>% # save as side effect
+filter(matchtype == "EXACT") %>% # get only exact match types 
+glimpse() %>% # check the data 
+pull(usagekey) %>%
+paste(collapse=",") %>% 
+paste('{
+"creator": "jwaller",
+"notification_address": [
+"jwaller@gbif.org"
+],
+"sendNotification": true,
+"format": "SIMPLE_CSV",
+"predicate": {
+"type": "and",
+"predicates": [
+{
+"type": "in",
+"key": "COUNTRY",
+"values": ["CL"]
+},
+{
+"type": "in",
+"key": "TAXON_KEY",
+"values": [',.,']
+}
+]}}',collapse="") %>% # create json sring 
+writeLines(file(Dir %+% "request.json")) # save the json request to use in curl 
+``` 
+
+
 # Matching the names
 
 Users will not always provide you with taxonkey lists. Often they will give you just a list of names. Therefore it is necessary to get taxon keys before moving forward. 
