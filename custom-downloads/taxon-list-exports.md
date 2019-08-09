@@ -6,10 +6,18 @@ Sometimes users want to download a lot of taxonkeys like **>40K in some cases**.
 
 If the taxonkey list is less than around 5K [see dicussion here](https://github.com/ropensci/rgbif/issues/362) then it is probably easier to do a download using a http GET request. It might also be possible to break up big downloads into ~5K-taxonkey chunks, but if even that is too many downloads, a taxonkey list custom download might be worth while or still requested. 
 
-# R script to download a small amount of names 
+# R script to download a semi-large amount of names 
 
+This R script takes advantage of the "in" predicate for downloading a semi-large amount names. 
 
 ```
+library(taxize)
+library(purrr)
+library(tibble)
+library(dplyr)
+library(magrittr)
+library(roperators)
+
 # pipeline for processing sci names -> downloads 
 Dir = "" # the location of your cleanNames.csv and where you want to save the output files 
 
@@ -47,6 +55,22 @@ paste('{
 writeLines(file(Dir %+% "request.json")) # save the json request to use in curl 
 ``` 
 
+Now run the download job. 
+```
+user = "jwaller"
+pwd = "" # enter your gbif user password
+email = "jwaller@gbif.org"
+url = "http://api.gbif.org/v1/occurrence/download/request"
+
+library(httr)
+
+POST(url = url, 
+config = authenticate(user, pwd), 
+add_headers("Content-Type: application/json"),
+body = upload_file(Dir %+% "request.json"), # path to your local file
+encode = 'json') %>% 
+content(as = "text")
+```
 
 # Matching the names
 
