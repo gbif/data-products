@@ -26,5 +26,5 @@ awk -F$'\t' '{print $1"\t"$13}' test.txt > test2.txt
 
 add a header to a large file in place
 ```
-sed -i '1i gbifId,scientificName,decimalLatitude,decimalLongitude' non_fish_export.tsv
+sed -i '1i gbifId,scientificName,decimalLatitude,decimalLongitude' test.csv
 ```
