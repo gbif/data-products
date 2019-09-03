@@ -18,6 +18,7 @@ split -l 7000000 pollinators2019.txt pollinators2019_ -d
 > 
 
 zip a file recursively
+zip -r pollinators2019Files.zip pollinators2019Files
 
 grab columns 1 and 13 from a tsv file and save as new file 
 ```
