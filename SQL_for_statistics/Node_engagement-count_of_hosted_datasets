@@ -1,0 +1,15 @@
+What we are after here are the number of datasets that a node is hosting through publishing organizations = 
+Publishers under a node that are hosting datasets that are **NOT** their own.
+
+    SELECT node.title, t1.* FROM (
+    SELECT node.title AS node, o.title AS publisher, o.key, d.installation_key AS ikey , count(*) FROM organization o
+    JOIN installation i ON i.organization_key = o.key
+    JOIN dataset d ON i.key = d.installation_key
+    JOIN node ON node.key = o.endorsing_node_key
+    WHERE d.deleted IS NULL
+    AND o.key != d.publishing_organization_key
+    GROUP BY node, publisher, ikey, o.key
+    )t1
+    RIGHT JOIN node ON t1.node = node.title
+    WHERE node.deleted IS NULL
+    ORDER BY node.title
