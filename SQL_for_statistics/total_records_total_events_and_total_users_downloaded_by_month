@@ -1,3 +1,6 @@
+This query lists the sum of records that users downloaded by month between specific dates.
+Excluded are deleted publishers and deleted datasets. Also excluded are downloads from @gbif.org addresses and where there is no filter i.e. full index downloads assuming most of these are mistakes.
+
     SELECT sum(od.total_records) AS total, count(od.key) AS event, count(DISTINCT od.created_by) AS users, to_char(od.created, 'YYYY-MM') year_month FROM 
     occurrence_download od 
     WHERE date(od.created) BETWEEN '2014-01-01' AND '2017-10-31'
