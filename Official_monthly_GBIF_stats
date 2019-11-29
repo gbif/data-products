@@ -1,0 +1,11 @@
+This is the overall download stats for three categories: Sum of downloaded records, number of users, number of download events.
+
+
+    SELECT sum(d.total_records) FROM occurrence_download d WHERE date(d.created) BETWEEN '2018-01-01' AND '2018-08-01' AND d.status = 'SUCCEEDED' 
+    AND d.notification_addresses NOT LIKE '%@gbif.org' AND created_by != 'nagios'
+    UNION ALL
+    SELECT count(distinct d.created_by) FROM occurrence_download d WHERE date(d.created) BETWEEN '2018-01-01' AND '2018-08-01' AND d.status = 'SUCCEEDED' 
+    AND d.notification_addresses NOT LIKE '%@gbif.org' AND created_by != 'nagios'
+    UNION ALL
+    SELECT count(distinct d.key) FROM occurrence_download d WHERE date(d.created) BETWEEN '2018-01-01' AND '2018-08-01' AND d.status = 'SUCCEEDED' 
+    AND d.notification_addresses NOT LIKE '%@gbif.org' AND created_by != 'nagios'
