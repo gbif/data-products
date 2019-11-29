@@ -9,4 +9,3 @@ Excluded are deleted publishers and deleted datasets. Also excluded are download
     AND od.notification_addresses NOT LIKE '%@gbif.org' AND od.created_by != 'nagios'
     GROUP BY 1,2 ORDER BY 2
 
-**ok**
