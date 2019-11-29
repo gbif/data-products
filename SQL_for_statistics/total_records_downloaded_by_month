@@ -1,0 +1,5 @@
+    SELECT sum(od.total_records) AS total, count(od.key) AS event, count(DISTINCT od.created_by) AS users, to_char(od.created, 'YYYY-MM') year_month FROM 
+    occurrence_download od 
+    WHERE date(od.created) BETWEEN '2014-01-01' AND '2017-10-31'
+    AND od.status = 'SUCCEEDED' AND od.notification_addresses NOT LIKE '%@gbif.org' AND od.created_by != 'nagios'
+    GROUP BY year_month ORDER BY year_month
