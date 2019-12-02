@@ -1,3 +1,5 @@
+## These SQL queries produce the yearly/monthly numbers that publishers most often demand. This also covers what goes into the Monthly Statistics ##
+
 Unless stated *otherwise* all SQL declarations are for the Postgres registry database and use standard Postgres SQL.
 
 * user download SQL (Registry Postgres)
