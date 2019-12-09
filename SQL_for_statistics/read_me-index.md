@@ -15,4 +15,4 @@ Unless stated *otherwise* all SQL declarations are for the Postgres registry dat
   
 * Country publishing (HIVE DB)
   * This gives the number of records shared by _publisher country_:
-    * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/HIVE_publishing-stats_by_publisher-country
+    * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/SQL_for_Publishing-stats_by_publisher-country_HIVE
