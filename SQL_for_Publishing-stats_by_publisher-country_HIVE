@@ -2,3 +2,8 @@ This SQL works only on HIVE and it produces the number of records shared by _pub
 
      SELECT count(*) AS CT, publishingcountry FROM occurrence_hdfs WHERE to_date(from_unixtime(CAST(fragmentcreated/1000 AS int))) BETWEEN '%(start)s' AND '%(end)s'
      GROUP BY publishingcountry ORDER BY CT DESC
+     
+SQL for year-end stats would look like this:
+
+     SELECT count(*) AS CT, publishingcountry FROM occurrence_hdfs WHERE to_date(from_unixtime(CAST(fragmentcreated/1000 AS int))) < '2020-01-01'
+     GROUP BY publishingcountry ORDER BY CT DESC
