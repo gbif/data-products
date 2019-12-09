@@ -3,7 +3,7 @@
 Unless stated *otherwise* all SQL declarations are for the Postgres registry database and use standard Postgres SQL.
 
 * **user download stats SQL** (Registry Postgres)
-  * **User downloads from a publishing country by publishing organization and by dataset:
+  * User downloads from a publishing country by publishing organization and by dataset:
     * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/country_records_user_download.md
   * User downloads for one publisher the download events, sum of downloaded records _for each dataset_ that users downloaded between specific dates.
     * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/Publisher_download_stats_by_dataset
@@ -13,6 +13,6 @@ Unless stated *otherwise* all SQL declarations are for the Postgres registry dat
     * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/total_records_total_events_and_total_users_downloaded_by_month
   * Node download events, sum of downloaded records that users downloaded between specific dates for **one specific node**. If more nodes should be included use the IN statement in the WHERE clause.
   
-* Country publishing (HIVE DB)
+* **Country publishing (HIVE DB)**
   * This gives the number of records shared by _publisher country_ and has _End-of-year_ SQL as well:
     * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/SQL_for_Publishing-stats_by_publisher-country_HIVE
