@@ -1,4 +1,4 @@
-What we are after here are the number of datasets that a node is hosting through publishing organizations = 
+What we are after here, are the number of datasets that a node is hosting through its publishing organizations = 
 Publishers under a node that are hosting datasets that are **NOT** their own.
 
     SELECT node.title, t1.* FROM (
