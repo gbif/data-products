@@ -3,8 +3,8 @@
 Unless stated *otherwise* all SQL declarations are for the Postgres registry database and use standard Postgres SQL.
 
 * **user download stats SQL** (Registry Postgres)
-  * User downloads from a publishing country by publishing organization and by dataset:
-    * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/country_records_user_download.md
+  * User downloads (number of downloaded records) from a publishing country by publishing organization and by dataset:
+    * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/Downloaded_records_by_country_publisher_and_dataset.md
   * User downloads for one publisher the download events, sum of downloaded records _for each dataset_ that users downloaded between specific dates.
     * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/Publisher_download_stats_by_dataset
   * **Node Engagement** Number of datasets that a node is hosting through its publishing organizations:
