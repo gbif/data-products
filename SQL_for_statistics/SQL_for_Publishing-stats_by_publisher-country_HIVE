@@ -1,4 +1,4 @@
-This SQL works only on HIVE and it produces the number of records shared by _publisher country_
+This SQL works only in HIVE and it produces the number of records shared by _publisher country_.
 
      SELECT count(*) AS CT, publishingcountry FROM occurrence_hdfs WHERE to_date(from_unixtime(CAST(fragmentcreated/1000 AS int))) BETWEEN '%(start)s' AND '%(end)s'
      GROUP BY publishingcountry ORDER BY CT DESC
