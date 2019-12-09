@@ -14,5 +14,5 @@ Unless stated *otherwise* all SQL declarations are for the Postgres registry dat
   * Node download events, sum of downloaded records that users downloaded between specific dates for **one specific node**. If more nodes should be included use the IN statement in the WHERE clause.
   
 * Country publishing (HIVE DB)
-  * This gives the number of records shared by _publisher country_:
+  * This gives the number of records shared by _publisher country_ and has _End-of-year_ SQL as well:
     * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/SQL_for_Publishing-stats_by_publisher-country_HIVE
