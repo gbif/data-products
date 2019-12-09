@@ -7,7 +7,7 @@ Unless stated *otherwise* all SQL declarations are for the Postgres registry dat
     * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/country_records_user_download.md
   * User downloads for one publisher the download events, sum of downloaded records _for each dataset_ that users downloaded between specific dates.
     * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/Publisher_download_stats_by_dataset
-  * Number of datasets that a node is hosting through its publishing organizations:
+  * **Node Engagament** Number of datasets that a node is hosting through its publishing organizations:
     * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/Node_engagement-count_of_hosted_datasets
   * The sum of records that users downloaded by month between specific dates _index wide_:
     * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/total_records_total_events_and_total_users_downloaded_by_month
