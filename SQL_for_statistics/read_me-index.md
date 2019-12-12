@@ -9,9 +9,10 @@ Unless stated *otherwise* all SQL declarations are for the Postgres registry dat
     * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/Publisher_download_stats_by_dataset
   * **Node Engagement** Number of datasets that a node is hosting through its publishing organizations:
     * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/Node_engagement-count_of_hosted_datasets
+  * Node download events, sum of downloaded records that users downloaded between specific dates for **one specific node**. If more nodes should be included use the IN statement in the WHERE clause.
   * The sum of records that users downloaded by month between specific dates _index wide_:
     * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/total_records_total_events_and_total_users_downloaded_by_month
-  * Node download events, sum of downloaded records that users downloaded between specific dates for **one specific node**. If more nodes should be included use the IN statement in the WHERE clause.
+
   
 * **Country publishing (HIVE DB)**
   * This gives the number of records shared by _publisher country_ and has _End-of-year_ SQL as well:
