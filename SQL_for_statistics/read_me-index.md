@@ -22,6 +22,8 @@ Unless stated *otherwise* all SQL declarations are for the Postgres registry dat
    * You are selecting via a function in the subquery. Postgres doesn't natively recognize JSON which is why it must be cast as such ( ::json ). The json_array_elements() function turns each download filter into a 'table' or a _set_. The "->>" is one type of operator you can use to pick at the data. [JSON Functions and Operators](https://www.postgresql.org/docs/12/functions-json.html) 
    * User download filter statistics based on country georeference:
      * []https://github.com/gbif/data-products/blob/master/SQL_for_statistics/user_download_filer-COUNTRY_georeference-DOWNLOAD-EVENTS.md
+   * User download filter statistics based on polygon geometry:
+     * https://github.com/gbif/data-products/blob/master/SQL_for_statistics/user_download_filter-POLYGON_geometry.md
   
 * **Country publishing (HIVE DB)**
   * This gives the number of records shared by _publisher country_ and has _End-of-year_ SQL as well:
