@@ -1,6 +1,6 @@
 # User download filter statistics based on country georeference
 
-## This SQL will get you the download events for a year based on the filter. If the user selected for _country_ or used a coordinate, that download will be counted.
+### This SQL will get you the download events for a year based on the filter. If the user selected for _country_ or used a _coordinate_, that download will be counted.
 
     SELECT t1.title, count(t1.fil) FROM (
     SELECT filter::json as fil, d.title as title, occurrence_download.created as crea FROM occurrence_download 
@@ -11,3 +11,5 @@
     --WHERE pred->>'key' = 'COUNTRY' 
     WHERE pred->>'key' = 'HAS_COORDINATE' 
     GROUP BY 1 ORDER BY 1
+
+You can switch between 'COUNTRY' and 'HAS_COORDINATE' by moving the out comment.
