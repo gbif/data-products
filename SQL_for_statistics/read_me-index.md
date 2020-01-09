@@ -15,7 +15,11 @@ Unless stated *otherwise* all SQL declarations are for the Postgres registry dat
     
 * **filter based user download stats SQL**
   * When searching inside the occurrence_download table's filter column, you will be dealing with JSON data. Postgres has not been well equipped to deal with JSON style data. For Postgres 11 which GBIF is using (tested 09-01-2020) the SQL posted in this repo will work.
-  
+  * Here is a sample of the flavor:
+    *     SELECT t1.fil FROM
+          (SELECT filter::json as fil FROM occurrence_download limit 1000)t1, json_array_elements(t1.fil->'predicates') AS pred
+          WHERE pred->>'key' = 'COUNTRY'
+   * You are selecting via a function in the subquery. Postgres doesn't natively recognize JSON which is why it must be cast as such (::json). The json_array_elements() function turns each download filter into a 'table' or a _set_. The "->>" is one type of operator you can use to pick at the data.
   
 * **Country publishing (HIVE DB)**
   * This gives the number of records shared by _publisher country_ and has _End-of-year_ SQL as well:
