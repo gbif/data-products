@@ -7,7 +7,7 @@ Excluded are deleted publishers and deleted datasets. Also excluded are download
     JOIN occurrence_download od ON od.key = dod.download_key
     WHERE o.country = 'AT' AND o.deleted IS NULL AND d.deleted IS NULL 
     AND date(od.created) BETWEEN '2018-01-01' AND '2018-12-31' 
-    AND od.status = 'SUCCEEDED' AND od.notification_addresses NOT LIKE '%@gbif.org' AND od.filter IS NOT NULL
+    AND od.status = 'SUCCEEDED' AND od.notification_addresses NOT LIKE '%@gbif.org' AND od.filter IS NOT NULL AND od.created_by != 'nagios'
     GROUP BY 1, 2
     ORDER BY 1
 
