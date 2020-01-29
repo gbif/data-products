@@ -8,7 +8,7 @@ Should be run in HUE or using HIVE command line. You need permission to access t
 
 1. go to http://c5hue.gbif.org:8888/hue/editor?
 2. You will need a database with your name in place of `jwaller`.  You can create a datbase in HUE using the `+`. 
-3. Next go to the `prod_g` database (or latest occurrence hdfs database). 
+3. Next go to the `prod_h` database (or latest occurrence hdfs database). 
 
 Run this in the HUE editor to create a table: 
 
