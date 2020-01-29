@@ -28,7 +28,7 @@ INSERT OVERWRITE TABLE jwaller.delimiter_csv
 SELECT 
   gbifId, 
   v_scientificName
-FROM prod_g.occurrence_hdfs
+FROM prod_h.occurrence_pipeline_hdfs
 LIMIT 100
 ```
 
