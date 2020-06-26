@@ -20,20 +20,32 @@ In other words, there are many variables when deciding to priortize one dataset 
 
 ## How to know what is unkown? 
 
-It is very difficult to known what occurs in a region without knowing what occurs in that region. The circularity of this requires any approach 
+It is very difficult to known what occurs in a region without knowing what occurs in that region. The circularity of this will always haunt whatever methods is chosen to assess data gaps.  
 
 Approaches to identifying what is missing:
 
-* Neighboring countries
+* Neighboring countries/regions
+* Comparing similar countries/regions
 * Checklists 
 * IUCN range maps 
 * Species Distribution Modeling 
+* ES50 
+
+Several data blog posts have been written about data gaps using these approaches. 
+https://data-blog.gbif.org/post/hunger-mapping/
+https://data-blog.gbif.org/post/gbif-checklist-datasets-and-data-gaps/
+https://data-blog.gbif.org/post/exploring-es50-for-gbif/
+https://data-blog.gbif.org/post/gbif-regional-statistics-2020/
 
 ## Are nodes really deciding to prioritize one project over another? 
 
 Is data publishing on GBIF driven by what is missing? Or is it driven by what is easiest? I am not a data publisher so it is hard for me to know what 
 
 ## Future directions 
+
+GBIF should probably invest efforts into discussing the scope of what type of reporting should be done into the data gaps issue. 
+
+
 
 
 
