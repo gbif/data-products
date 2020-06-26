@@ -32,10 +32,10 @@ Approaches to identifying what is missing:
 * ES50 
 
 Several data blog posts have been written about data gaps using these approaches. 
-https://data-blog.gbif.org/post/hunger-mapping/
-https://data-blog.gbif.org/post/gbif-checklist-datasets-and-data-gaps/
-https://data-blog.gbif.org/post/exploring-es50-for-gbif/
-https://data-blog.gbif.org/post/gbif-regional-statistics-2020/
+* https://data-blog.gbif.org/post/hunger-mapping/
+* https://data-blog.gbif.org/post/gbif-checklist-datasets-and-data-gaps/
+* https://data-blog.gbif.org/post/exploring-es50-for-gbif/
+* https://data-blog.gbif.org/post/gbif-regional-statistics-2020/
 
 ## Are nodes really deciding to prioritize one project over another? 
 
