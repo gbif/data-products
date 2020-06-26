@@ -4,30 +4,39 @@
 
 ## Background 
 
-GBIF participant nodes are often looking for guidance about what data is needed or information about how to prioritize data publishing to GBIF. This is a difficult question for GBIF to answer. GBIF largely aggregates data about what is **known** about a region or taxonomic group. What is **unknown** is **unknown**.  
+GBIF participant nodes are often looking for guidance about what data is needed or information about how to prioritize data publishing to GBIF. This is a difficult question for GBIF to answer. GBIF largely aggregates data about what is **known** about a region or taxonomic group. 
 
-## Definitional shortcomings 
+> What is **unknown** is **unknown**.  
 
-One person's gap is not another person's gap. Missing data from a genus of reptiles might seem like a very big gap for someone who researches reptiles, but having no occurrences from an entire family of diptera might not seem like a big gap. So priorities and gaps are **subjective**. This make guidance on how to fill gaps difficult from a neutral perspective. 
+## Definitional shortcomings (the **scoping-issue**)
 
-Usually, when people are discussing data gaps, they mean of things most people care about. Or **important things** things like perhaps charismatic mammals, birds, reptiles, but not plankton (If you are a plankton researcher, you might mean plankton). So telling a node with limited budget and time that they have no plankton records in their country or another 100 groups is informational overload. The challenge is summarizing the information to avoid informational overload in a way that is both informative but not misleading. 
+One person's gap is not another person's gap. Missing data from a genus of reptiles might seem like a very big gap for someone who researches reptiles, but having no occurrences from an entire family of diptera might not seem like a big gap. So priorities and gaps are **subjective**. This makes guidance on how to fill gaps difficult from a neutral perspective. 
 
-For example, Switzerland publishes almost no bird occurrence records. It does however have many insect records, is there a bird data gap in Switzerland? Should Switzerland not prioritize insect records in the future? 
+Usually, when people are discussing data gaps, they mean of things **most** people care about. Or **important things** things like perhaps charismatic mammals, birds, reptiles, but not plankton (or the group they care about). So telling a node with limited budget and time that they have no plankton records in their country or another 100 groups is informational overload. The challenge is summarizing the information to avoid informational overload in a way that is both informative but not misleading. 
 
-Additionally, gaps research 
+For example, Switzerland has almost no bird occurrence records (relative to other countries in Europe). It does however have many insect records, is there a bird data gap in Switzerland? Should Switzerland not prioritize insect records in the future? Maybe the insect records in Switzerland are more valuable because the proposed project is from a known pest? Data gaps data from GBIF could never make these decisions. 
 
-There are many gaps in many areas. 
+In other words, there are many variables when deciding to priortize one dataset over another for publishing or funding (not just what is missing). 
 
-## Approaches to identifying what is missing:
+## How to know what is unkown? 
+
+It is very difficult to known what occurs in a region without knowing what occurs in that region. The circularity of this requires any approach 
+
+Approaches to identifying what is missing:
 
 * Neighboring countries
 * Checklists 
 * IUCN range maps 
-* SDM 
+* Species Distribution Modeling 
 
+## Are nodes really deciding to prioritize one project over another? 
 
+Is data publishing on GBIF driven by what is missing? Or is it driven by what is easiest? I am not a data publisher so it is hard for me to know what 
 
 ## Future directions 
+
+
+
 
 
 
