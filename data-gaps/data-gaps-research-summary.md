@@ -2,6 +2,8 @@
 
 > A **data gap** is an area either geographic or taxonomic in which the GBIF network is missing data. 
 
+https://docs.gbif.org/2020-work-programme/en/#_activity_3a_identify_priority_gaps_2
+
 ## Background 
 
 GBIF participant nodes are often looking for guidance about what data is needed or information about how to prioritize data publishing to GBIF. This is a difficult question for GBIF to answer. GBIF largely aggregates data about what is **known** about a region or taxonomic group. 
