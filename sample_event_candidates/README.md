@@ -7,5 +7,9 @@ These can be ['plot', 'transect', 'trap', 'trawl'] and I used these for the prot
 The repository for these terms is this:
 https://docs.google.com/spreadsheets/d/16lEFzwLVBfjONXGflnLpWre_kDnhrRKdU9hPnmqr_M4/edit#gid=2049077323
 
+|               |                    |
+| ------------- |:------------------:|
+|![alt text](https://github.com/gbif/data-products/blob/master/sample_event_candidates/SampEvent_drawexpress.png)      | right-aligned | $1600 |
 
 
+![alt text](https://github.com/gbif/data-products/blob/master/sample_event_candidates/SampEvent_drawexpress.png) Here is point 1
