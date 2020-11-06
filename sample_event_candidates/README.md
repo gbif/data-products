@@ -8,8 +8,10 @@ The repository for these terms is this:
 https://docs.google.com/spreadsheets/d/16lEFzwLVBfjONXGflnLpWre_kDnhrRKdU9hPnmqr_M4/edit#gid=2049077323
 
 |               |                    |
-| ------------- |:------------------:|
-|![alt text](https://github.com/gbif/data-products/blob/master/sample_event_candidates/SampEvent_drawexpress.png)      | right-aligned | $1600 |
+| ------------- |:------------------|
+|![alt text](https://github.com/gbif/data-products/blob/master/sample_event_candidates/SampEvent_drawexpress.png)      | The first step is to assemble *sampling protocol terms* which is a large subject unto itself.
+Once there is a pool of terms such as the simple ones mentioned above|
+|               |                     |
 
 
 ![alt text](https://github.com/gbif/data-products/blob/master/sample_event_candidates/SampEvent_drawexpress.png) Here is point 1
