@@ -1,6 +1,6 @@
 # Identifiying datasets of type (Sample Event)
 
-The mission is to enable users to identify datasets most relevant to their purpose. Tagging or categorizing the GBIF datasets will enable our effort to make this kind of filtering possible.
+The mission is to enable users to identify datasets most relevant to their purpose. Tagging or categorizing the GBIF datasets will serve as a launchpad for our effort to make this kind of filtering possible. Example: "Give me all records from sediment-corer type samples"
 Initially all datasets in GBIF should be parsed by using a range of keywords that signify a sampling event dataset.
 These can be ['plot', 'transect', 'trap', 'trawl'] and I used these for the prototyping.
 
@@ -14,4 +14,4 @@ Once there is a pool of terms such as the simple ones mentioned above|
 |               |                     |
 
 
-![alt text](https://github.com/gbif/data-products/blob/master/sample_event_candidates/SampEvent_drawexpress.png) Here is point 1
+
