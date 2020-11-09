@@ -9,7 +9,7 @@ https://docs.google.com/spreadsheets/d/16lEFzwLVBfjONXGflnLpWre_kDnhrRKdU9hPnmqr
 
 |               |                    |
 | ------------- |:------------------|
-|![alt text](https://github.com/gbif/data-products/blob/master/sample_event_candidates/SampEvent_drawexpress.png)      | The first step is to assemble *sampling protocol terms* which is a large subject unto itself.
+|![alt text](https://github.com/gbif/data-products/blob/master/sample_event_candidates/SampEvent_drawexpress.png)      | The first step is to assemble *sampling protocol terms* which is a large subject unto itself. \We would want members of the community with knowledge in this area to contribute to the Sampling Event vocabulary.
 Once there is a pool of terms such as the simple ones mentioned above|
 |               |                     |
 
