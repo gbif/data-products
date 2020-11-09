@@ -1,3 +1,6 @@
+Please copy the content into https://jsonlint.com/ to get the JSON pretty print format.
+
+
 {
 	"_source": {
 		"includes": ["title", "description", "_score", "samplingDescription"],
