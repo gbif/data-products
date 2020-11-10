@@ -14,3 +14,6 @@ https://docs.google.com/spreadsheets/d/16lEFzwLVBfjONXGflnLpWre_kDnhrRKdU9hPnmqr
 
 
 
+# The sampling_event_elastic_multiterms.py module itself
+
+![alt text](https://github.com/gbif/data-products/blob/master/sample_event_candidates/Se_code_function_chart.png)
