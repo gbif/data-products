@@ -25,4 +25,4 @@ Record:
 | --- | --- | --- | --- | --- | --- |
 |85b0b9ce-1fac-46a6-ac25-c4ea3645b7af  | artsprosjektet 46 15 noramph | Project goals in application Inventory of the Norwegian... |Sledges  TRAWLs  grabs  corers  ROVs and scubadivers| ['corer', 'trawl'] | 13.98 |
 
-* Protocol_terms being a list of the different terms identified in the metadata text fields.
+(* ) Protocol_terms being a list of the different terms identified in the metadata text fields.
