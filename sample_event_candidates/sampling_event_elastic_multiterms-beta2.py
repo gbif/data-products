@@ -20,12 +20,13 @@ elas = es(
 def srch(body):
     #simply returns the ES search response
     res = elas.search(index="dataset", _source = ["title", "description", "_score", "samplingDescription.sampling"], _source_excludes = ["geographicCoverages"], body=body)
+    #Narrows the fields looked at to the relevant ones.
     return res
 
 
 def condition(term):
     '''
-    Returns a construct of multiple 'should' conditions whcih are 'or' statements in ES
+    Returns a construct of multiple 'should' conditions which are 'or' statements in ES
     :param terms: in our case a list of sample event/protocol terms
     :return: the construct to be inserted into the payload body to be consumed by make_body()
     '''
@@ -48,7 +49,7 @@ def condition(term):
 def make_body(terms):
     '''
     Create a body for ES API consumption
-    conditions: search terms
+    terms: search terms in a multiple condition format (see https://github.com/gbif/data-products/blob/master/sample_event_candidates/Sampling_event_ElasticSearch_body_json)
     '''
     payload = {
 	"_source": {
@@ -80,14 +81,15 @@ def remove_stopWords(wordText, custom_stop):
 
 def clean(text, stopped=False):
     #For cleaning html and linebreaks from text strings
-    #Good for keyword and free text fields
-    print('desc text yooooooo : ', text)
+    #Good for free text fields
+
     if text:
         soup = BeautifulSoup(text, features="html.parser")
         res = soup.get_text()
         clean = re.sub(r'[^A-Za-z0-9/\. ]+', ' ', res)
-        # print('#########soup res === ', res)
+
         if stopped:
+            #Stopword processing
             restop = remove_stopWords(res, [])
             print('¤¤¤STOPPED RESSS :::;: ', restop)
     else:
@@ -162,9 +164,11 @@ def mine_ore(ore, term, filename):
 
     rowdict = {'datasetkey': '', 'title': '', 'description': '',
                'sampling': '', 'protocol_terms': [], 'score': ''}
+    #This dictionary is crucial as it is being populated incrementally
 
     with open(dir+'/'+filename, 'w', newline='', encoding='utf-8') as sample_event_file:
         fieldnames = ['datasetkey', 'title', 'description', 'sampling', 'protocol_terms', 'score']
+        #Above are headers
         writer = csv.DictWriter(sample_event_file, fieldnames=fieldnames, delimiter='\t')
         writer.writeheader()
 
@@ -172,22 +176,22 @@ def mine_ore(ore, term, filename):
         #When one of the text fields are empty, the output is directed into the keyerror file.
 
         for record in ore:
+            #This is where the dictionary is being populated into an eventual row.
             rowdict = {key: 0 for key in rowdict}
+            #Resetting the dictionary values so that there is no aggregation between datasets
             rowdict['protocol_terms'] = []
             datasetkey = record['_id']
             print('DATASETKEY:' , datasetkey)
             rowdict['datasetkey'] = datasetkey
-            # nuggets('datasetkey', datasetkey)
             score = record['_score']
-            # nuggets('score', score)
             meta_source= record['_source']
-            # print('gold ### =',type(gold_source), gold_source)
             title = meta_source['title']
+            #Title is the first time we search for protocol terms.
             title = clean(title, stopped=False)
             title = keywordUpper(rowdict, term, title, 'title')
             current_dict = title[1]
-            print('title[0] : ', title[0])
-            print('title[1] : ', title[1])
+            #Dictionary populated 1st time. REMEMBER that we got a tuple back from keywordUpper() - the dictionary is in position [1]
+
             current_dict['title'] = title[0]
             # ltitle = lemmatizer(title)
             # nuggets('title', ltitle)
