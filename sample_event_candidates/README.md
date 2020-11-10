@@ -16,7 +16,7 @@ https://docs.google.com/spreadsheets/d/16lEFzwLVBfjONXGflnLpWre_kDnhrRKdU9hPnmqr
 
 # The sampling_event_elastic_multiterms.py module itself
 
-![alt text](https://github.com/gbif/data-products/blob/master/sample_event_candidates/Se_code_function_chart.png)
+![alt text](https://github.com/gbif/data-products/blob/master/sample_event_candidates/Se_code_function_chart_medium.png)
 
 The keywords_to_uppercase() method is needed because free-text fields in GBIF occationally contain impurities such as HTML elements, line breaks, control characters and others.
 The methods mining() and keywords_to_uppercase() exchange a dictionary structure that gets assigned values until a complete record is formed. Then that record gets written to a csv file. 
