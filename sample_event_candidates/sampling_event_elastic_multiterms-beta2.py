@@ -140,7 +140,7 @@ def keywordUpper(dict, keyword, text, field):
         #text is keyword uppercased
         dict[field] = answer
         m = bool(re.search(r'{}'.format(word), text))
-        #If the text is found witht he regex above then the protocol term is added to the dictionary field 'protocol_terms' (list)
+        #If the text is found with the regex search above, then the protocol term is appended to the dictionary field 'protocol_terms' (list)
         if m:
             print('in m bool- word= ', word)
             hit = word
@@ -193,62 +193,39 @@ def mine_ore(ore, term, filename):
             #Dictionary populated 1st time. REMEMBER that we got a tuple back from keywordUpper() - the dictionary is in position [1]
 
             current_dict['title'] = title[0]
-            # ltitle = lemmatizer(title)
-            # nuggets('title', ltitle)
 
             description = meta_source['description']
             description_cleaned = clean(description,stopped=False)
-            print('DDC:::', description_cleaned)
             description_cleaned = keywordUpper(current_dict, term, description_cleaned, 'description')
             current_dict = description_cleaned[1]
             current_dict['description'] = description_cleaned[0]
-            print('DESC CLEANED and subbed: ', description_cleaned)
-            # nuggets('description', description_cleaned)
             current_dict['score'] = score
-            print('D#D#D#D#D#  ', description_cleaned, '\n¤¤¤¤¤¤¤¤¤ ', description)
-            # description = keywordUpper(term, description_cleaned)
             try:
-                # hl = highlight(gold, pattern, ['highlight', 'description'])
-                # print('HIGHLIGHT¤¤¤¤¤:', hl)
                 samplingDescription = meta_source['samplingDescription']['sampling']
                 if samplingDescription:
-                    # print('SSAAMMPPLLIINNGG !!!!! : ', samplingDescription)
-                    # break
                     samplingDescription_cleaned = clean(samplingDescription, stopped=False)
                     samplingDescription_cleaned = keywordUpper(current_dict, term, samplingDescription_cleaned, 'sampling')
                     current_dict = samplingDescription_cleaned[1]
                     current_dict['sampling'] = samplingDescription_cleaned[0]
-                    print('cccleaned SAMPLING:::: ', samplingDescription_cleaned)
-                    print(type(samplingDescription))
-                    # term = samplingDescription_cleaned[1]
-                    print('TTTTTERM: ', term)
-                    # break
+
             except KeyError as e:
-                #rewrite to match format of the writerow()
+                #If the text field is empty in the dataset
                 print('keyerror ¤¤¤¤¤¤¤¤')
                 print(e)
-                fieldnames_error = ['_id', '_score', '_source']
-                # errow = {'_id': gold['_id'], '_score': gold['_score'], '_source': gold['_source']}
                 fieldnames = ['datasetkey', 'title', 'description', 'sampling', 'protocol_terms', 'score']
                 errow = {'datasetkey': datasetkey, 'title': title[0], 'description': description_cleaned[0], 'sampling': 'Dataset contained no sampling description', 'protocol_terms': current_dict['protocol_terms'], 'score': score}
-                # keys = gold.keys()
+
                 print('ERROW ==== ', errow)
                 kwriter = csv.DictWriter(kerrorfile, fieldnames=fieldnames, delimiter='\t')
                 kwriter.writerow(errow)
-                # break
-                words = []
                 continue
 
-
-            print('type orig description: ', type(description))
-            # print('going to write: datasetkey: {}, title: {}, description_cleaned: {}, sampling: {}, protocol_terms: {}, score: {} '.format(
-            #     datasetkey, title[0], description_cleaned, samplingDescription, term, score))
             print('CURRR dict : ', current_dict)
             writer.writerow(
-                # {'datasetkey': datasetkey, 'title': title[0], 'description': description_cleaned, 'sampling': samplingDescription_cleaned, 'protocol_terms': term, 'score': score}
+                # {'datasetkey': datasetkey, 'title': title, 'description': description_cleaned, 'sampling': samplingDescription_cleaned, 'protocol_terms': term, 'score': score}
                 current_dict
             )
-            # break
+
         return filename
 
 
@@ -256,13 +233,14 @@ def mine_ore(ore, term, filename):
 def run_it():
     elas = es(
         ["http://registry-search.gbif.org:9200/dataset/", "localhost:9200"])
-    # print(es.info())
+
     protocols = ['corer', 'trawl']
-    # lemma = nltk.wordnet.WordNetLemmatizer()
+    #Above are the protocols being searched
+
     filename = 'testOCT_{}_{}2020-11-06TEST.csv'.format('Nov', 'combine')
     js = run_ES_SE_search(protocols)
-    fin = mine_ore(js, protocols, filename)
-    print(dir+fin)
+    paydirt = mine_ore(js, protocols, filename)
+    print(dir+paydirt)
 
 run_it()
 
