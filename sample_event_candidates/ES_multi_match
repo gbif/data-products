@@ -1,0 +1,15 @@
+payload = {
+	"_source": {
+		"includes": ["title", "description", "_score", "samplingDescription.sampling"],
+		"excludes": ["geographicCoverages"]
+	},
+	"size": 1000,
+	"query": {
+		"multi_match": {
+			"query": term,
+			"type": "phrase",
+			"fields": ["title", "source.description", "samplingDescription.sampling"]
+		}
+	},
+	"track_total_hits": "true"
+}
