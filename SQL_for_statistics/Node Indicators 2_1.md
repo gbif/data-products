@@ -1,6 +1,6 @@
  SQL for 2.1 Hosting other publishers datasets. A measure of the willingness of the node network to host on behalf of other publishers. 
 
-
+```
 SELECT t2.node, t2.publisher, t2.publisher_key, sum(t2.count) FROM (
 SELECT  t1.* FROM (
 SELECT node.title AS node, o.title AS publisher, o.KEY AS publisher_key, d.installation_key AS ikey , count(*) FROM organization o
@@ -16,7 +16,7 @@ RIGHT JOIN node ON t1.node = node.title
 WHERE node.deleted IS NULL AND t1.node IS NOT NULL
 )t2 
 GROUP BY 1,2,3 ORDER BY 1;
-
+```
 
 
 
@@ -26,15 +26,18 @@ Please notice that only type country nodes are considered.
 **Sanity check:**
 Looking at the SQL query result there is this data point:
 
-
-## node                publisher      publisher_key                               sum(count)**
-Burkina Faso        FasoBIF        9764f31c-f399-4912-97fd-01ebf8b8141c        2
+|node|publisher   |publisher_key   |count   |
+|---|---|---|---|
+|Burkina Faso   |FasoBIF           |9764f31c-f399-4912-97fd-01ebf8b8141c   |2   |
 
 
 Look up the publisher key in the api : https://api.gbif.org/v1/dataset/search?hostingOrg=9764f31c-f399-4912-97fd-01ebf8b8141c
 We see that the count is 2, The "hostingOrganizationKey": "9764f31c-f399-4912-97fd-01ebf8b8141c", and      "hostingOrganizationTitle" is "FasoBIF" in both cases, yet the publishing organizations are CNRST/INERA and SP/CONEDD-DCIME respectively. This checks out because the hosting org is not the publisher.
 Another data point to look at is:
-Ghana Biodiversity Information Facility        Ghana Biodiversity Information Facility (GhaBIF)        4bc4943a-c94f-4bd4-9aa3-2a9cae94398a        8
+|node|publisher   |publisher_key   |count   |
+|---|---|---|---|
+|Ghana Biodiversity Information Facility      |Ghana Biodiversity Information Facility (GhaBIF)           |4bc4943a-c94f-4bd4-9aa3-2a9cae94398a   |8   |
+
 
 
 Look up: https://api.gbif.org/v1/dataset/search?hostingOrg=4bc4943a-c94f-4bd4-9aa3-2a9cae94398a
