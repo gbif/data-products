@@ -1,4 +1,4 @@
-# SQL for 2.1 Hosting other publishers datasets. A measure of the willingness of the node network to host on behalf of other publishers. 
+## SQL for 2.1 Hosting other publishers datasets. A measure of the willingness of the node network to host on behalf of other publishers. 
 
 ```
 SELECT t2.node, t2.publisher, t2.publisher_key, sum(t2.count) FROM (
