@@ -1,0 +1,9 @@
+-- This is meant to be generic , but this example shows stats for one dataset
+
+ SELECT count(DISTINCT u.email), d.title , sum(dod.number_records) , count(od."key") FROM public."user" u 
+   JOIN occurrence_download od ON od.created_by = u.username
+   JOIN dataset_occurrence_download dod ON dod.download_key = od."key" 
+   JOIN dataset d ON d."key" = dod.dataset_key 
+   JOIN organization o ON o."key" = d.publishing_organization_key 
+WHERE o.KEY = '66522820-055c-11d8-b84e-b8a03c50a862' AND date(od.created) BETWEEN '2020-01-01' AND '2020-12-31' AND od.status IN ('SUCCEEDED', 'FILE_ERASED') 
+GROUP BY 2;
