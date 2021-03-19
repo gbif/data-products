@@ -1,11 +1,11 @@
 This query lists for _one publisher_, the download events, sum of downloaded records _for each dataset_ that users downloaded between specific dates.
 Excluded are deleted publishers and deleted datasets. Also excluded are downloads from @gbif.org addresses and where there is no filter i.e. full index downloads assuming most of these are mistakes.
 
-    SELECT DISTINCT d.key, d.title, count(od.key) AS download_event, sum(dod.number_records) FROM occurrence_download od
+    ```SELECT DISTINCT d.key, d.title, count(od.key) AS download_event, sum(dod.number_records) FROM occurrence_download od
     JOIN dataset_occurrence_download dod ON od.key = dod.download_key
     JOIN dataset d ON d.key = dod.dataset_key
     JOIN organization o ON o.key = d.publishing_organization_key
     WHERE o.key = 'd9699a79-4736-45c2-925c-f4033ac67d52' AND od.status = 'SUCCEEDED' AND od.created BETWEEN '2016-01-07' AND '2017-06-30'
     AND od.notification_addresses NOT LIKE '%@gbif.org' AND od.created_by != 'nagios'
-    GROUP BY 1,2 ORDER BY 2
+    GROUP BY 1,2 ORDER BY 2```
 
