@@ -21,8 +21,8 @@ The keywords_to_uppercase() method is needed because free-text fields in GBIF oc
 The methods mining() and keywords_to_uppercase() exchange a dictionary structure that gets assigned values until a complete record is formed. Then that record gets written to a csv file. 
 
 Record:
-| dataset_key | title | description | sampling | protocol_terms* | ES_score |
+| dataset_key | title | description | sampling | protocol_terms | ES_score |
 | --- | --- | --- | --- | --- | --- |
-|85b0b9ce-1fac-46a6-ac25-c4ea3645b7af  | artsprosjektet 46 15 noramph | Project goals in application Inventory of the Norwegian... |Sledges  TRAWLs  grabs  corers  ROVs and scubadivers| ['corer', 'trawl'] | 13.98 |
+|85b0b9ce-1fac-46a6-ac25-c4ea3645b7af  | artsprosjektet 46 15 noramph | Project goals in application Inventory of the Norwegian... |Sledges  TRAWLs  grabs  corers  ROVs and scubadivers| 'trawl' | 13.98 |
 
 (* ) Protocol_terms being a list of the different terms identified in the metadata text fields.
