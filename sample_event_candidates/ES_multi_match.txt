@@ -1,0 +1,51 @@
+url variable: http://registry-search.gbif.org:9200/dataset/_search/?_source=title,description,endpoints.url&_source_excludes=geographicCoverages
+
+
+payload = {
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "query": "(\"transponder\") OR (\"transponders\")",
+            "fields": [
+              "title",
+              "description",
+              "samplingDescription.sampling"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "size": 2000,
+  "highlight": {
+    "pre_tags": [
+      "#"
+    ],
+    "post_tags": [
+      "#"
+    ],
+    "fields": {
+      "_all": {
+        "pre_tags": [
+          "<em>"
+        ],
+        "post_tags": [
+          "</em>"
+        ]
+      },
+      "title": {
+        "number_of_fragments": 0
+      },
+      "description": {
+        "number_of_fragments": 5
+      },
+      "samplingDescription.sampling": {
+        "number_of_fragments": 5,
+        "order": "score",
+        "type": "plain"
+      }
+    }
+  }
+}
