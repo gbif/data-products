@@ -4,6 +4,9 @@ The mission is to enable users to identify datasets most relevant to their purpo
 Initially all datasets in GBIF should be parsed by using a range of keywords that signify a sampling event dataset.
 These can be ['plot', 'transect', 'trap', 'trawl'] (of course there are many others). I just used these for the code prototyping.
 
+The Elastic Search query strategy for identifying sampling event datasets changed from making a query with multiple different sampling protocols inside, to a query of one protocol term at the time and its plural/participle siblings.
+Example ['survey', 'surveys', 'surveying]
+
 The repository for these terms is this:
 https://docs.google.com/spreadsheets/d/16lEFzwLVBfjONXGflnLpWre_kDnhrRKdU9hPnmqr_M4/edit#gid=2049077323
 (To be expanded)
