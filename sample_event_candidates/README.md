@@ -23,12 +23,10 @@ https://docs.google.com/spreadsheets/d/16lEFzwLVBfjONXGflnLpWre_kDnhrRKdU9hPnmqr
 # The sampling_event_elastic_multiterms.py module itself
 
 ![alt text](https://github.com/gbif/data-products/blob/master/sample_event_candidates/Se_code_function_chart_medium.png)
-The keywords_to_uppercase() method is needed because free-text fields in GBIF occationally contain impurities such as HTML elements, line breaks, control characters and others.
-The methods mining() and keywords_to_uppercase() exchange a dictionary structure that gets assigned values until a complete record is formed. Then that record gets written to a csv file. 
+There is a clean() method in the code to deal with free-text fields in GBIF, which occationally contain impurities such as HTML elements, line breaks, control characters and others.
+The methods mining() and regex_check_term() interact to get sample protocol terms assigned to the row under construction. Then that record gets written to a csv file. 
 
 Record:
 | dataset_key | title | description | sampling | protocol_terms | ES_score |
 | --- | --- | --- | --- | --- | --- |
 |85b0b9ce-1fac-46a6-ac25-c4ea3645b7af  | artsprosjektet 46 15 noramph | Project goals in application Inventory of the Norwegian... |Sledges  TRAWLs  grabs  corers  ROVs and scubadivers| 'trawl' | 13.98 |
-
-(* ) Protocol_terms being a list of the different terms identified in the metadata text fields.
