@@ -7,9 +7,9 @@ These can be 'plot', 'transect', 'trap', 'trawl'... (of course there are many ot
 
 The Elastic Search query strategy for identifying sampling event datasets changed from making a query with multiple different sampling protocols inside, to a query of one protocol term at the time and its plural/participle siblings.
 Example ['survey', 'surveys', 'surveying']  
-Elastic Search was chosen because it comes with a range of built in tools that could become useful, such as stemming, lemmatization, and other Natural Language Processing (NLP) tools and techniques.
+Elastic Search was chosen because it comes with a range of built in tools that could become useful, such as stemming, lemmatization, and other Natural Language Processing (NLP) tools and techniques. Elastic Search is also orders of magnitude faster than relying on API calls or relational database queries.
 
-The repository for these terms is this:
+The repository for these sample event terms is this:
 https://docs.google.com/spreadsheets/d/16lEFzwLVBfjONXGflnLpWre_kDnhrRKdU9hPnmqr_M4/edit#gid=2049077323
 (To be expanded)
 
