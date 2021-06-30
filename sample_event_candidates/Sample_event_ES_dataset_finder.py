@@ -13,10 +13,10 @@ current_date = datetime.date.today()
 
 lemma = nltk.wordnet.WordNetLemmatizer()
 
+#global var
 elas = es(
     ["http://registry-search.gbif.org:9200/dataset/", "localhost:9200"])
 #Parameters for the URL portion of the ElasticSearch query
-
 
 def srch(body):
     #simply returns the ES search response
@@ -206,7 +206,6 @@ def regex_check_term(term, highlight):
     #highlight is the 'highlighted' text from the ES response
     '''
     opterm = []
-    atoms = None
     #formatting the regex pattern
     # for j in term:
     atoms = term.split()
