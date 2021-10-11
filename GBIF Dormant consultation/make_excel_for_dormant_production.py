@@ -1,7 +1,8 @@
-# Deliver JSON webpage content to one single flat list of dictionaries
+# Purpose: Build a fundamental excel file for MS Power Automate mail merger based on the non-publishing orgs API https://api.gbif.org/v1/organization/nonPublishing
 #Keys of interest can be chosen from the json response
-#The dictionary flat file will be written to a cs file
-#Cool recursion BTW
+#The processed dictionary flat file will be written to a Pandas table. 
+# This data frame table will be used to calculate years-since-registration and filtering out publishers that are actually hosting resources. 
+
 from tabulate import tabulate
 import requests
 import csv
@@ -155,8 +156,6 @@ dicts_for_DF = mk_dicts_of_nonpublishing_api()
 #list of dicts
 
 df_candidate = pandas.DataFrame(dicts_for_DF)
-# print(tabulate(df_candidate, tablefmt='psql'))
-df_candidate.to_excel('dormant_2021_10-08_K_dfCandidate.xlsx', index=False)
 
 orgs_list = df_candidate['key'].tolist()
 
@@ -175,5 +174,5 @@ gt3years_df = final_df[final_df.diff_years >= 3]
 print('gt3years df length: ', gt3years_df.shape[0])
 prod_df = gt3years_df[gt3years_df.endorsementStatus == 'ENDORSED']
 
-prod_df.to_excel('dormant_2021_10-08_K.xlsx', index=False)
+prod_df.to_excel('your_excel_file_path.xlsx', index=False)
 ## \ end of EXE part
