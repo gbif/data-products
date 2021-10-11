@@ -150,11 +150,10 @@ def identify_hosting_publishers(uuids):
             hosting_list.append(j)
     return hosting_list
 
+#!! start EXE part: -v
 dicts_for_DF = mk_dicts_of_nonpublishing_api()
 #list of dicts
 
-# print('d for df:::', dicts_for_DF)
-#EXE part: -v
 df_candidate = pandas.DataFrame(dicts_for_DF)
 # print(tabulate(df_candidate, tablefmt='psql'))
 df_candidate.to_excel('dormant_2021_10-08_K_dfCandidate.xlsx', index=False)
@@ -164,7 +163,6 @@ orgs_list = df_candidate['key'].tolist()
 hosting_pubs = identify_hosting_publishers(orgs_list)
 
 cleaned_df_for_excel = df_candidate[~df_candidate['key'].isin(hosting_pubs)]
-
 
 # #below can be used for further test operations with read_pickle()
 # df_for_excel.to_excel('test_created_field2.xlsx')
@@ -176,6 +174,6 @@ print('final df length: ', final_df.shape[0])
 gt3years_df = final_df[final_df.diff_years >= 3]
 print('gt3years df length: ', gt3years_df.shape[0])
 prod_df = gt3years_df[gt3years_df.endorsementStatus == 'ENDORSED']
-#
-prod_df.to_excel('dormant_2021_10-08_K.xlsx', index=False)
 
+prod_df.to_excel('dormant_2021_10-08_K.xlsx', index=False)
+## \ end of EXE part
