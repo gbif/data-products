@@ -3,7 +3,6 @@
 #The processed dictionary flat file will be written to a Pandas table. 
 # This data frame table will be used to calculate years-since-registration and filtering out publishers that are actually hosting resources. 
 
-from tabulate import tabulate
 import requests
 import csv
 import pandas
@@ -17,7 +16,6 @@ delivery = []
 # upon the 'end_of_records' response being True
 # dormants = []
 def api_dormant(url, offset, limit=500):
-    '''Recursive function where the web content JSON is collected'''
     #url: a url string with var placeholder, like "https://api.gbif.org/v1/organization/nonPublishing?limit=200&offset={}"
     #offset is the incrementor for paging.
     #Limit holds the size of the JSON response.
@@ -27,22 +25,14 @@ def api_dormant(url, offset, limit=500):
     resp = requests.get(nurl)
     spons = json.loads(resp.text)
     jresp = spons['results']
-    # print(jresp)
+
     return jresp
-    #the JSON we areinterested in
-    # dormants.append(jresp)
-    # print('endrecs bool: ', spons['endOfRecords'])
-    # if spons['endOfRecords']:
-    #     return dormants
-    # print('no end yet, hombre')
-    # noffset = spons['offset'] + limit
-    #The neat thing here is that by adding 'offset' and 'limit', it is impossible to jump ahead and miss records (results)
-    # return api_dormant(url, noffset, limit)
+
 
 def get_contacts(contacts):
     # get the contacts from the api call into ONE dictionary
     processed_contacts = []
-    standard_contact_dict = {'firstName':'', 'lastName':'', 'email':''}
+    standard_contact_dict = {' contact firstName':'', ' contact lastName':'', ' contact email':''}
     for item in contacts:
 
         # make unique keys in each contact dict
@@ -84,7 +74,7 @@ def mk_dicts_of_nonpublishing_api():
         except KeyError:
             print('keyerrrrrrrrrrror ::' , dct['key'])
             continue
-        print('left dict:', left_part_dict)
+        
         # this dict contains the publisher information. There will be a middle part (contacts) and the node manager part, then an end part (difference in years)
         pub_contacts = {**left_part_dict, **res_contacts}
         # Add the pub dict and contacts dict together (like railway coupling)
