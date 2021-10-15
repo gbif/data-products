@@ -13,4 +13,4 @@ https://api.gbif.org/v1/node/
 https://api.gbif.org/v1/organization/{}/hostedDataset
 
 
-There is also a bit of out-commented code that can turn the final data frame into a pickle object for further processing by other Python scripts.
+There is also a bit of out-commented code that can turn the final data frame into a pickle object (serialization) for further processing by other Python scripts.
