@@ -44,7 +44,7 @@
 **Classification not applied** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=CLASSIFICATION_NOT_APPLIED&advanced=1)</small><br>The denormalized classification could not be applied to the name usage. For example if the id based classification has no ranks.<br><small>**Terms**: dwc:parentNameUsageID</small><br>
 
 
-**VERNACULAR_NAME_INVALID** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=VERNACULAR_NAME_INVALID&advanced=1)</small><br>At least one vernacular name extension record attached to this name usage is invalid. This usually happens when the system doesn't recogninse some of the character used in the name.<br><small>**Terms**: dwc:vernacularName and extension https://rs.gbif.org/extension/gbif/1.0/vernacularname.xml</small><br>
+**VERNACULAR_NAME_INVALID** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=VERNACULAR_NAME_INVALID&advanced=1)</small><br>At least one vernacular name extension record attached to this name usage is invalid. This usually happens when the system doesn't recognize some of the characters used in the name.<br><small>**Terms**: dwc:vernacularName and extension https://rs.gbif.org/extension/gbif/1.0/vernacularname.xml</small><br>
 
 
 **Description invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=DESCRIPTION_INVALID&advanced=1)</small><br>At least one description extension record attached to this name usage is invalid.<br><small>**Terms**: extension http://rs.gbif.org/extension/gbif/1.0/description.xml</small><br>
