@@ -41,34 +41,34 @@
 **Classification rank order invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=CLASSIFICATION_RANK_ORDER_INVALID&advanced=1)</small><br>?? can be ignored.<br><small>**Terms**: dwc:parentNameUsageID</small><br>
 
 
-**Classification not applied** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=CLASSIFICATION_NOT_APPLIED&advanced=1)</small><br>The denormalized classification could not be applied to the name usage. For example if the id based classification has no ranks.<br><small>**Terms**: dwc:parentNameUsageID</small><br>
+**Classification not applied** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=CLASSIFICATION_NOT_APPLIED&advanced=1)</small><br>The denormalized classification could not be applied to the name. For example if the id based classification has no ranks.<br><small>**Terms**: dwc:parentNameUsageID</small><br>
 
 
-**VERNACULAR_NAME_INVALID** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=VERNACULAR_NAME_INVALID&advanced=1)</small><br>At least one vernacular name extension record attached to this name usage is invalid. This usually happens when the system doesn't recognize some of the characters used in the name.<br><small>**Terms**: dwc:vernacularName and extension https://rs.gbif.org/extension/gbif/1.0/vernacularname.xml</small><br>
+**VERNACULAR_NAME_INVALID** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=VERNACULAR_NAME_INVALID&advanced=1)</small><br>At least one vernacular name extension record attached to this name is invalid. This usually happens when the system doesn't recognize some of the characters used in the name.<br><small>**Terms**: dwc:vernacularName and extension https://rs.gbif.org/extension/gbif/1.0/vernacularname.xml</small><br>
 
 
-**Description invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=DESCRIPTION_INVALID&advanced=1)</small><br>At least one description extension record attached to this name usage is invalid.<br><small>**Terms**: extension http://rs.gbif.org/extension/gbif/1.0/description.xml</small><br>
+**Description invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=DESCRIPTION_INVALID&advanced=1)</small><br>At least one description extension record attached to this name is invalid.<br><small>**Terms**: extension http://rs.gbif.org/extension/gbif/1.0/description.xml</small><br>
 
 
-**Distribution invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=DISTRIBUTION_INVALID&advanced=1)</small><br>At least one distribution extension record attached to this name usage is invalid.<br><small>**Terms**: extension https://rs.gbif.org/extension/gbif/1.0/distribution.xml</small><br>
+**Distribution invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=DISTRIBUTION_INVALID&advanced=1)</small><br>At least one distribution extension record attached to this name is invalid.<br><small>**Terms**: extension https://rs.gbif.org/extension/gbif/1.0/distribution.xml</small><br>
 
 
-**Species profile invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=MULTIMEDIA_INVALID&advanced=1)</small><br>At least one species profile extension record attached to this name usage is invalid.<br><small>**Terms**: extension https://rs.gbif.org/extension/gbif/1.0/speciesprofile_2019-01-29.xml</small><br>
+**Species profile invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=MULTIMEDIA_INVALID&advanced=1)</small><br>At least one species profile extension record attached to this name is invalid.<br><small>**Terms**: extension https://rs.gbif.org/extension/gbif/1.0/speciesprofile_2019-01-29.xml</small><br>
 
 
-**Multimedia invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=SPECIES_PROFILE_INVALID&advanced=1)</small><br>At least one multimedia extension record attached to this name usage is invalid. This covers multimedia coming in through various extensions including Audubon core, Simple images or multimedia or EOL media.<br><small>**Terms**: See https://data-blog.gbif.org/post/gbif-multimedia/</small><br>
+**Multimedia invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=SPECIES_PROFILE_INVALID&advanced=1)</small><br>At least one multimedia extension record attached to this name is invalid. This covers multimedia coming in through various extensions including Audubon core, Simple images or multimedia or EOL media.<br><small>**Terms**: See https://data-blog.gbif.org/post/gbif-multimedia/</small><br>
 
 
-**Bibliographic references invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=BIB_REFERENCE_INVALID&advanced=1)</small><br>At least one bibliographic reference extension record attached to this name usage is invalid.<br><small>**Terms**: Extension https://rs.gbif.org/extension/gbif/1.0/references.xml</small><br>
+**Bibliographic references invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=BIB_REFERENCE_INVALID&advanced=1)</small><br>At least one bibliographic reference extension record attached to this name is invalid.<br><small>**Terms**: Extension https://rs.gbif.org/extension/gbif/1.0/references.xml</small><br>
 
 
-**Alternative identifiers invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=ALT_IDENTIFIER_INVALID&advanced=1)</small><br>At least one alternative identifier extension record attached to this name usage is invalid.<br><small>**Terms**: Extension https://rs.gbif.org/extension/gbif/1.0/identifier.xml</small><br>
+**Alternative identifiers invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=ALT_IDENTIFIER_INVALID&advanced=1)</small><br>At least one alternative identifier extension record attached to this name is invalid.<br><small>**Terms**: Extension https://rs.gbif.org/extension/gbif/1.0/identifier.xml</small><br>
 
 
-**Could not be matched to GBIF backbone** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=BACKBONE_MATCH_NONE&advanced=1)</small><br>Name usage could not be matched to the GBIF backbone.<br><small>**Terms**: dwc:scientificName</small><br>
+**Could not be matched to GBIF backbone** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=BACKBONE_MATCH_NONE&advanced=1)</small><br>Name could not be matched to the GBIF backbone.<br><small>**Terms**: dwc:scientificName</small><br>
 
 
-**Fuzzy GBIF backbone match** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=BACKBONE_MATCH_FUZZY&advanced=1)</small><br>Name usage match to the GBIF backbone could only be done using a fuzzy, non exact match.<br><small>**Terms**: dwc:scientificName</small><br>
+**Fuzzy GBIF backbone match** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=BACKBONE_MATCH_FUZZY&advanced=1)</small><br>Name match to the GBIF backbone could only be done using a fuzzy, non exact match.<br><small>**Terms**: dwc:scientificName</small><br>
 
 
 **Synonym lacking an accepted name** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=ACCEPTED_NAME_MISSING&advanced=1)</small><br>Synonym lacking an accepted name.<br><small>**Terms**: dwc:TaxonomicStatus, dwc:acceptedNameUsageID</small><br>
@@ -83,7 +83,7 @@
 **Original name not unique** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=ORIGINAL_NAME_NOT_UNIQUE&advanced=1)</small><br>Record has a verbatim original name (basionym) which is not unique and refers to several records.<br><small>**Terms**: dwc:originalNameUsage</small><br>
 
 
-**Relationship missing** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=RELATIONSHIP_MISSING&advanced=1)</small><br>There were problems representing all name usage relationships, i.e. the link to the parent, accepted and/or original name. The interpreted record in GBIF is lacking some of the original source relation.<br><small>**Terms**: dwc:originalNameUsage, dwc:parentNameUsage, dwc:acceptedNameUsage, dwc:acceptedNameUsageID, dwc:TaxonomicStatus, dwc:parentNameUsageID</small><br>
+**Relationship missing** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=RELATIONSHIP_MISSING&advanced=1)</small><br>There were problems representing all name relationships, i.e. the link to the parent, accepted and/or original name. The interpreted record in GBIF is lacking some of the original source relation.<br><small>**Terms**: dwc:originalNameUsage, dwc:parentNameUsage, dwc:acceptedNameUsage, dwc:acceptedNameUsageID, dwc:TaxonomicStatus, dwc:parentNameUsageID</small><br>
 
 
 **Basionym relation derived** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=ORIGINAL_NAME_DERIVED&advanced=1)</small><br>Record has a original name (basionym) relationship which was derived from name & authorship comparison, but did not exist explicitly in the data. This will only be flagged in programmatically generated GBIF backbone usages. GBIF backbone specific issue.
