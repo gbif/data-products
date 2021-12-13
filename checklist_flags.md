@@ -53,7 +53,7 @@
 **Distribution invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=DISTRIBUTION_INVALID&advanced=1)</small><br>At least one distribution extension record attached to this name usage is invalid.<br><small>**Terms**: extension https://rs.gbif.org/extension/gbif/1.0/distribution.xml</small><br>
 
 
-**Species profile invalid"** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=MULTIMEDIA_INVALID&advanced=1)</small><br>At least one species profile extension record attached to this name usage is invalid.<br><small>**Terms**: extension https://rs.gbif.org/extension/gbif/1.0/speciesprofile_2019-01-29.xml</small><br>
+**Species profile invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=MULTIMEDIA_INVALID&advanced=1)</small><br>At least one species profile extension record attached to this name usage is invalid.<br><small>**Terms**: extension https://rs.gbif.org/extension/gbif/1.0/speciesprofile_2019-01-29.xml</small><br>
 
 
 **Multimedia invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=SPECIES_PROFILE_INVALID&advanced=1)</small><br>At least one multimedia extension record attached to this name usage is invalid. This covers multimedia coming in through various extensions including Audubon core, Simple images or multimedia or EOL media.<br><small>**Terms**: See https://data-blog.gbif.org/post/gbif-multimedia/</small><br>
