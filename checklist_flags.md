@@ -1,8 +1,8 @@
 
-**Name unparsable** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=UNPARSABLE&advanced=1)</small><br>The value in the field flagged couldn't be parsed by the GBIF system. You can check if a scientific name can be parsed with our name parser tool:https://www.gbif.org/tools/name-parser <br><small>**Terms**: any name field</small><br>
+**Name unparsable** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=UNPARSABLE&advanced=1)</small><br>The value in the field flagged couldn't be parsed by the GBIF system. You can check if a scientific name can be parsed with our name parser tool: https://www.gbif.org/tools/name-parser <br><small>**Terms**: any name field</small><br>
 
 
-**Name partially parsed** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=PARTIALLY_PARSABLE&advanced=1)</small><br>The value in the field flagged could only be partially parsed by the GBIF system. You can check if a scientific name can be parsed with our name parser tool:https://www.gbif.org/tools/name-parser <br><small>**Terms**: any name field</small><br>
+**Name partially parsed** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=PARTIALLY_PARSABLE&advanced=1)</small><br>The value in the field flagged could only be partially parsed by the GBIF system. You can check if a scientific name can be parsed with our name parser tool: https://www.gbif.org/tools/name-parser <br><small>**Terms**: any name field</small><br>
 
 
 **ParentNameUsageID invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=PARENT_NAME_USAGE_ID_INVALID&advanced=1)</small><br>The value for the ParentNameUsageID doesn't correspond to a valid taxon. Check that the parentNameUsageID points to a valid taxon within the checklist (parentNameUsageID should contain the value of the taxonID of the parent taxon in the checklist)<br><small>**Terms**: dwc:parentNameUsageID</small><br>
