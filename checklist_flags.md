@@ -93,22 +93,24 @@ TODO: is this describing the flag correctly? Needs verification. Examples appear
 **Relationship missing** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=RELATIONSHIP_MISSING&advanced=1)</small><br>There were problems representing all name relationships, i.e. the link to the parent, accepted and/or original name. The interpreted record in GBIF is lacking some of the original source relation.<br><small>**Terms**: [dwc:originalNameUsage](https://dwc.tdwg.org/list/#dwc_originalNameUsage), [dwc:parentNameUsage](https://dwc.tdwg.org/list/#dwc_parentNameUsage), [dwc:acceptedNameUsage](https://dwc.tdwg.org/list/#dwc_acceptedNameUsage), [dwc:acceptedNameUsageID](https://dwc.tdwg.org/list/#dwc_acceptedNameUsageID), [dwc:TaxonomicStatus](https://dwc.tdwg.org/list/#dwc_taxonomicStatus), [dwc:parentNameUsageID](https://dwc.tdwg.org/list/#dwc_parentNameUsageID)</small><br>
 
 
-**Basionym relation derived** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=ORIGINAL_NAME_DERIVED&advanced=1)</small><br>Record has a original name (basionym) relationship which was derived from name & authorship comparison, but did not exist explicitly in the data. This will only be flagged in programmatically generated GBIF backbone usages. GBIF backbone specific issue.
+**Basionym relation derived** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=ORIGINAL_NAME_DERIVED&advanced=1)</small><br>The record in GBIF has a relationship to an original name (basionym) that was derived from name & authorship comparison, but did not exist explicitly in the source data. This will only be flagged in programmatically generated GBIF backbone records of name usages. GBIF backbone specific issue.
 
 
-**Conflicting basionym combination** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=CONFLICTING_BASIONYM_COMBINATION&advanced=1)</small><br>There have been more than one accepted name in a homotypical basionym group of names. GBIF backbone specific issue.<br><small>**Terms**: dwc:scientificName</small><br>
+**Conflicting basionym combination** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=CONFLICTING_BASIONYM_COMBINATION&advanced=1)</small><br>There have been more than one accepted name in a homotypical basionym group of names. GBIF backbone specific issue.<br><small>**Terms**: [dwc:scientificName](https://dwc.tdwg.org/list/#dwc_scientificName)</small><br>
 
 
-**No species included** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=NO_SPECIES&advanced=1)</small><br>The group (currently only genera are tested) are lacking any accepted species. GBIF backbone specific issue.
+**No species included** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=NO_SPECIES&advanced=1)</small><br>The group (currently only genera are tested) is lacking any accepted species. GBIF backbone specific issue.
 
 
-**Name parent mismatch** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=NAME_PARENT_MISMATCH&advanced=1)</small><br>The (accepted) bi/trinomial name does not match the parent name and should be recombined into the parent genus/species. For example the species Picea alba with a parent genus Abies is a mismatch and should be replaced by Abies alba. GBIF backbone specific issue.
+**Name parent mismatch** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=NAME_PARENT_MISMATCH&advanced=1)</small><br>The (accepted) bi/trinomial name does not match the parent name and should be recombined into the parent genus/species. For example the species _Picea alba_ with a parent genus _Abies_ is a mismatch, and should be replaced by _Abies alba_. GBIF backbone specific issue.
 
 
-**Orthographic variant** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=ORTHOGRAPHIC_VARIANT&advanced=1)</small><br>A potential orthographic variant exists in the backbone. GBIF backbone specific issue.
+**Orthographic variant** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=ORTHOGRAPHIC_VARIANT&advanced=1)</small><br>An entry in the backbone is suspected to be only a spelling variation of an otherwise existing name. GBIF backbone specific issue.
 
 
-**Homonym** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=HOMONYM&advanced=1)</small><br>A not synonymized homonym exists for this name in some other backbone source which have been ignored at build time.
+**Homonym** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=HOMONYM&advanced=1)</small><br>A not synonymized homonym exists for this name in some other backbone source which have been ignored at build time. GBIF backbone specific issue.
+<!--- 
+TODO: Need a better explanation. Why not-synonymized, and ignored? What does it mean to a user? I would have assumed this flag to notify users that a homonym (identical name but different authorship) does exist that describes an unrelated group of organisms (taxon).
+--->
 
-
-**Published earlier than parent name** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=PUBLISHED_BEFORE_GENUS&advanced=1)</small><br>A bi/trinomial name published earlier than the parent genus was published. This might indicate that the name should rather be a recombination.
+**Published earlier than parent name** <small>(GBIF backbone)</small> <small>[example](https://www.gbif.org/species/search?issue=PUBLISHED_BEFORE_GENUS&advanced=1)</small><br>A bi/trinomial name was seemingly published earlier than the parent genus/species. This might indicate a homonym issue, or that the name should rather be a recombination. GBIF backbone specific issue.
