@@ -32,37 +32,44 @@
 **Basionym author mismatch** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=BASIONYM_AUTHOR_MISMATCH&advanced=1)</small><br>The authorship of the original name does not match the authorship in brackets of the taxon name. This flags the relationship between the two names as suspicious, based on the formal rules defined by nomenclatural codes.<br><small>**Terms**: [dwc:scientificName](https://dwc.tdwg.org/list/#dwc_scientificName), [dwc:scientificNameAuthorship](https://dwc.tdwg.org/list/#dwc_scientificNameAuthorship), [dwc:originalNameUsage](https://dwc.tdwg.org/list/#dwc_originalNameUsage)</small><br>
 
 
-**Taxonomic status mismatch** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=TAXONOMIC_STATUS_MISMATCH&advanced=1)</small><br>The taxonomic status of a name is based on taxonomic opinion. In combination of data from various sources, taxonomic opinions can differ. This flag alerts to seeming inconsistencies within a group of names.<br>TODO: is this flag implemented yet?<br><small>**Terms**: [dwc:taxonomicStatus](https://dwc.tdwg.org/list/#dwc_taxonomicStatus)</small><br>
+**Taxonomic status mismatch** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=TAXONOMIC_STATUS_MISMATCH&advanced=1)</small><br>The taxonomic status of a name is based on taxonomic opinion. In combination of data from various sources, taxonomic opinions can differ. This flag alerts to seeming inconsistencies within a group of names.<br><small>**Terms**: [dwc:taxonomicStatus](https://dwc.tdwg.org/list/#dwc_taxonomicStatus)</small><br>
+<!--- 
+TODO: is this check/flag implemented yet? 
+--->
+
+**Classification parent cycle** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=PARENT_CYCLE&advanced=1)</small><br>The child-parent relationships between taxon names result in a cycle that needs to be resolved/cut.<br><small>**Terms**: [dwc:parentNameUsageID](https://dwc.tdwg.org/list/#dwc_parentNameUsageID)</small><br>
 
 
-**Classification parent cycle** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=PARENT_CYCLE&advanced=1)</small><br>The child parent classification resulted into a cycle that needs to be resolved/cut.<br><small>**Terms**: dwc:parentNameUsageID</small><br>
+**Classification rank order invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=CLASSIFICATION_RANK_ORDER_INVALID&advanced=1)</small><br>The taxon names in a child-parent chain are out of sequence relating to their ranks. Make sure that each child taxon points to its direct parent, as represented in the checklist.<br><small>**Terms**: [dwc:parentNameUsageID](https://dwc.tdwg.org/list/#dwc_parentNameUsageID), [dwc:taxonRank](https://dwc.tdwg.org/list/#dwc_taxonRank)</small><br>
+<!--- 
+TODO: is this check/flag implemented yet? 
+--->
+
+**Classification not applied** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=CLASSIFICATION_NOT_APPLIED&advanced=1)</small><br>The denormalized classification of the checklist could not be applied to the name, for example if an id-based classification does not specify taxon ranks.<br><small>**Terms**: [dwc:parentNameUsageID](https://dwc.tdwg.org/list/#dwc_parentNameUsageID)</small><br>
+<!--- 
+TODO: is this describing the flag correctly? Needs verification. Examples appear to represent _normalized_ classification.
+--->
 
 
-**Classification rank order invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=CLASSIFICATION_RANK_ORDER_INVALID&advanced=1)</small><br>?? can be ignored.<br><small>**Terms**: dwc:parentNameUsageID</small><br>
+**Vernacular name invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=VERNACULAR_NAME_INVALID&advanced=1)</small><br>At least one vernacular name attached to this taxon name, linked from the Vernacular Names extension, could not be interpreted. This usually happens when the system doesn't recognize some of the characters used in the name.<br><small>**Terms**: [dwc:vernacularName](https://dwc.tdwg.org/list/#dwc_vernacularName) and [Vernacular Names](https://tools.gbif.org/dwca-validator/extension.do?id=gbif:VernacularName) extension http://rs.gbif.org/extension/gbif/1.0/vernacularname.xml</small><br>
 
 
-**Classification not applied** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=CLASSIFICATION_NOT_APPLIED&advanced=1)</small><br>The denormalized classification could not be applied to the name. For example if the id based classification has no ranks.<br><small>**Terms**: dwc:parentNameUsageID</small><br>
+**Description invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=DESCRIPTION_INVALID&advanced=1)</small><br>At least one description record for this taxon name, linked from the Taxon Description extension, could not be interpreted.<br><small>**Terms**: [Taxon Description](https://tools.gbif.org/dwca-validator/extension.do?id=gbif:Description) extension http://rs.gbif.org/extension/gbif/1.0/description.xml</small><br>
 
 
-**VERNACULAR_NAME_INVALID** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=VERNACULAR_NAME_INVALID&advanced=1)</small><br>At least one vernacular name extension record attached to this name is invalid. This usually happens when the system doesn't recognize some of the characters used in the name.<br><small>**Terms**: dwc:vernacularName and extension https://rs.gbif.org/extension/gbif/1.0/vernacularname.xml</small><br>
+**Distribution invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=DISTRIBUTION_INVALID&advanced=1)</small><br>At least one species distribution record for this taxon name, linked from the Species Distribution extension, could not be interpreted.<br><small>**Terms**: [Species Distribution](https://tools.gbif.org/dwca-validator/extension.do?id=gbif:Distribution) extension https://rs.gbif.org/extension/gbif/1.0/distribution.xml</small><br>
 
 
-**Description invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=DESCRIPTION_INVALID&advanced=1)</small><br>At least one description extension record attached to this name is invalid.<br><small>**Terms**: extension http://rs.gbif.org/extension/gbif/1.0/description.xml</small><br>
+**Species profile invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=SPECIES_PROFILE_INVALID&advanced=1)</small><br>At least one species profile record for this taxon name, linked from the Species Profile extension, could not be interpreted.<br><small>**Terms**: [Species Profile](https://tools.gbif.org/dwca-validator/extension.do?id=gbif:SpeciesProfile) extension https://rs.gbif.org/extension/gbif/1.0/speciesprofile_2019-01-29.xml</small><br>
 
 
-**Distribution invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=DISTRIBUTION_INVALID&advanced=1)</small><br>At least one distribution extension record attached to this name is invalid.<br><small>**Terms**: extension https://rs.gbif.org/extension/gbif/1.0/distribution.xml</small><br>
+**Multimedia invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=MULTIMEDIA_INVALID&advanced=1)</small><br>At least one multimedia extension record attached to this taxon name could not be interpreted. This covers multimedia coming in through various [extensions](https://tools.gbif.org/dwca-validator/extensions.do), including Audubon core, Simple images or multimedia or EOL media.<br><small>**Terms**: See https://data-blog.gbif.org/post/gbif-multimedia/</small><br>
 
 
-**Species profile invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=MULTIMEDIA_INVALID&advanced=1)</small><br>At least one species profile extension record attached to this name is invalid.<br><small>**Terms**: extension https://rs.gbif.org/extension/gbif/1.0/speciesprofile_2019-01-29.xml</small><br>
+**Bibliographic references invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=BIB_REFERENCE_INVALID&advanced=1)</small><br>At least one bibliographic reference for this taxon name, linked from the Literature References extension, could not be interpreted.<br><small>**Terms**: [Literature References](https://tools.gbif.org/dwca-validator/extension.do?id=gbif:Reference) Extension https://rs.gbif.org/extension/gbif/1.0/references.xml</small><br>
 
 
-**Multimedia invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=SPECIES_PROFILE_INVALID&advanced=1)</small><br>At least one multimedia extension record attached to this name is invalid. This covers multimedia coming in through various extensions including Audubon core, Simple images or multimedia or EOL media.<br><small>**Terms**: See https://data-blog.gbif.org/post/gbif-multimedia/</small><br>
-
-
-**Bibliographic references invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=BIB_REFERENCE_INVALID&advanced=1)</small><br>At least one bibliographic reference extension record attached to this name is invalid.<br><small>**Terms**: Extension https://rs.gbif.org/extension/gbif/1.0/references.xml</small><br>
-
-
-**Alternative identifiers invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=ALT_IDENTIFIER_INVALID&advanced=1)</small><br>At least one alternative identifier extension record attached to this name is invalid.<br><small>**Terms**: Extension https://rs.gbif.org/extension/gbif/1.0/identifier.xml</small><br>
+**Alternative identifiers invalid** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=ALT_IDENTIFIER_INVALID&advanced=1)</small><br>At least one alternative identifier for this taxon name, linked from the Alternative Identifiers extension, could not be interpreted.<br><small>**Terms**: [Alternative Identifiers](https://tools.gbif.org/dwca-validator/extension.do?id=gbif:Identifier) extension https://rs.gbif.org/extension/gbif/1.0/identifier.xml</small><br>
 
 
 **Could not be matched to GBIF backbone** <small>(checklist)</small> <small>[example](https://www.gbif.org/species/search?issue=BACKBONE_MATCH_NONE&advanced=1)</small><br>Name could not be matched to the GBIF backbone.<br><small>**Terms**: dwc:scientificName</small><br>
