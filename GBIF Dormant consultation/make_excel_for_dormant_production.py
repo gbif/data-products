@@ -105,9 +105,9 @@ def get_node_manager(uuid):
         except KeyError:
             continue
             #
-    # print('type? ', type(node_manager), node_manager)
+
     return node_manager
-#
+
 def calc_difference_between_registration_date_and_now(df):
     # param df: The data frame = df_for_excel
     print('TEST created... ', df.head().to_string )
@@ -164,5 +164,5 @@ gt3years_df = final_df[final_df.diff_years >= 3]
 print('gt3years df length: ', gt3years_df.shape[0])
 prod_df = gt3years_df[gt3years_df.endorsementStatus == 'ENDORSED']
 
-prod_df.to_excel('your_excel_file_path.xlsx', index=False)
+prod_df.to_excel('C:/test/your_excel_file_name.xlsx', index=False)
 ## \ end of EXE part
