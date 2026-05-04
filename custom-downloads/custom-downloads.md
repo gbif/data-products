@@ -58,7 +58,7 @@ SELECT if(mediatype IS NULL,'',joinArray(mediatype,'\\;')) AS mediatype, ...
 
 Now we will copy the file into the production server in order to share the file with others. 
 
-1. Log onto C5. `ssh jwaller@c5gateway-vh.gbif.org`
+1. Log onto C5. `ssh jwaller@cli1.gbif.org`
 2. Go to `cd /mnt/auto/misc/download.gbif.org/custom_download`
 3. You can now optionally make a personal directory `mkdir jwaller`
 
